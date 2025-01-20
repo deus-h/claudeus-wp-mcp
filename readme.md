@@ -9,6 +9,7 @@
 [![NPM Version](https://img.shields.io/npm/v/claudeus-wp-mcp.svg)](https://www.npmjs.com/package/claudeus-wp-mcp)
 [![NPM Downloads](https://img.shields.io/npm/dm/claudeus-wp-mcp.svg)](https://www.npmjs.com/package/claudeus-wp-mcp)
 [![GitHub Issues](https://img.shields.io/github/issues/deus-h/claudeus-wp-mcp.svg)](https://github.com/deus-h/claudeus-wp-mcp/issues)
+[![smithery badge](https://smithery.ai/badge/claudeus-wp-mcp)](https://smithery.ai/server/claudeus-wp-mcp)
 
 ## 🌟 Unleash Your WordPress Superpowers!
 
@@ -54,6 +55,15 @@ This isn't just a tool – it's your ticket to WordPress enlightenment. Whether 
 Ready to transform your WordPress workflow from a garage band to a stadium-filling metal symphony? Let's rock! 🎸
 
 ## 📖 Quick Start Guide
+
+
+### Installing via Smithery
+
+To install claudeus-wp-mcp for Claude Desktop automatically via [Smithery](https://smithery.ai/server/claudeus-wp-mcp):
+
+```bash
+npx -y @smithery/cli install claudeus-wp-mcp --client claude
+```
 
 ### 1. Prerequisites
 ```bash
