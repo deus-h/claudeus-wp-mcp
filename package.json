@@ -24,7 +24,7 @@
     "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "clean": "rm -rf dist node_modules",
-    "inspector": "pnpx @modelcontextprotocol/inspector dist/inspector-wrapper.js",
+    "inspector": "node scripts/launch-inspector.js",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "test": "NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" jest",
