@@ -3,7 +3,7 @@ import { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprot
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import express, { Response } from 'express';
-import axios, { AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
 import { SecurityManager } from './security/SecurityManager.js';
 import { ShopAPI } from './api/shop.js';
 import { allTools, toolCapabilities } from './tools/index.js';

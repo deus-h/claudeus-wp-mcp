@@ -1,8 +1,9 @@
 import { config } from 'dotenv';
-import { SiteConfig, RawSiteConfig, SiteConfigurations } from './types/config.js';
+import { RawSiteConfig, SiteConfigurations } from './types/config.js';
 import fs from 'fs';
 
-config();
+// Quiet mode to avoid polluting stdout (breaks MCP JSON-RPC protocol)
+config({ quiet: true });
 
 export const DEFAULT_SITE = 'default_test';
 

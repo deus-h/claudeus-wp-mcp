@@ -13,8 +13,8 @@ import { SecurityConfig } from './types/security.js';
 import { BaseApiClient } from './api/base-client.js';
 import { registerTools } from './mcp/tools.js';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables (quiet mode to avoid polluting stdout which breaks MCP JSON-RPC)
+dotenv.config({ quiet: true });
 
 // Custom logger that ensures we only write to stderr for non-MCP communication
 const log = {
@@ -26,6 +26,11 @@ const log = {
 
 async function main() {
     try {
+        // Debug: Log received environment variables (useful for Inspector testing)
+        if (process.env.NODE_ENV === 'development') {
+            log.debug('Environment variables received:', Object.keys(process.env).sort());
+        }
+        
         // Load site configurations
         const siteConfig = await loadSiteConfig();
         log.info(`Loaded ${Object.keys(siteConfig).length} site configurations`);

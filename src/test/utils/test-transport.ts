@@ -56,7 +56,7 @@ export class TestTransport extends EventEmitter implements Transport {
         process.stdout.write('\r' + this.progressBar);
     }
 
-    private logTest(action: string): void {
+    private logTest(_action: string): void {
         TestTransport.testCount++;
         TestTransport.updateProgress();
     }
