@@ -3,7 +3,7 @@
 ## 🎸 Quick Start (Inspector)
 
 ### 1. Update Your wp-sites.json
-Edit `/Users/deus/opus/mcp/claudeus-wp-mcp/wp-sites.json` with your WordPress credentials:
+Edit `wp-sites.json` in the project root with your WordPress credentials:
 
 ```json
 {
@@ -23,25 +23,39 @@ Edit `/Users/deus/opus/mcp/claudeus-wp-mcp/wp-sites.json` with your WordPress cr
 4. Click "Add New"
 5. Copy the generated password (format: `xxxx xxxx xxxx xxxx xxxx xxxx`)
 
-### 2. Configure MCP Inspector
+### 2. Launch Inspector
 
-In the Inspector UI you have open:
+The Inspector will automatically open with `WP_SITES_PATH` **pre-filled**! 🎸
+
+**Just run:**
+```bash
+pnpm inspector
+```
+
+**What happens:**
+- Inspector UI opens in your browser
+- `WP_SITES_PATH` is **already filled** with the default path
+- You can change it in the UI if needed
+- Click "Connect" to start!
+
+**To customize the default path permanently:**
+See [INSPECTOR-CUSTOMIZATION.md](./INSPECTOR-CUSTOMIZATION.md) for details.
+
+**Manual Configuration (if needed):**
+
+If you prefer manual setup in Inspector UI:
 
 **Transport Type:** `STDIO`
 
 **Command:** `dist/inspector-wrapper.js`
 
-**Arguments:** `dist/index.js`
-
-**Environment Variables (CRITICAL):**
-
-Click **"Add Environment Variable"** and add:
+**Environment Variables:**
 
 | Variable Name | Value |
 |--------------|-------|
-| `WP_SITES_PATH` | `/Users/deus/opus/mcp/claudeus-wp-mcp/wp-sites.json` |
+| `WP_SITES_PATH` | (Your path to wp-sites.json) |
 
-**Important:** The other env vars (HOME, LOGNAME, PATH, SHELL, TERM, USER) are inherited system variables - they're fine! You just need to ADD the `WP_SITES_PATH` variable.
+**Note:** The other env vars (HOME, PATH, USER, etc.) are automatically provided by Inspector - you only need `WP_SITES_PATH`!
 
 ### 3. Test in Inspector
 
