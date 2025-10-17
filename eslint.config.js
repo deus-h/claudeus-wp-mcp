@@ -16,7 +16,11 @@ export default [
         Buffer: true,
         console: true,
         process: true,
-        URL: true
+        URL: true,
+        setTimeout: true,
+        clearTimeout: true,
+        setInterval: true,
+        clearInterval: true
       }
     },
     plugins: {
@@ -37,6 +41,22 @@ export default [
       }],
       'no-case-declarations': 'off',
       'no-unused-vars': 'off' // Using @typescript-eslint/no-unused-vars instead
+    }
+  },
+  {
+    files: ['**/*.test.ts', '**/test/**/*.ts'],
+    languageOptions: {
+      globals: {
+        expect: true,
+        describe: true,
+        it: true,
+        test: true,
+        beforeEach: true,
+        afterEach: true,
+        beforeAll: true,
+        afterAll: true,
+        jest: true
+      }
     }
   }
 ]; 

@@ -6,12 +6,8 @@ import {
     ListResourceTemplatesRequestSchema,
     ReadResourceRequestSchema,
     ListPromptsRequestSchema,
-    GetPromptRequestSchema,
-    InitializeRequestSchema,
-    Prompt,
-    PromptMessage
+    GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
-import { Tool, ListToolsResponse, CallToolResponse } from '../types/mcp.js';
 import { PostsApiClient } from '../api/posts.js';
 import { PagesApiClient } from '../api/pages.js';
 import { MediaApiClient } from '../api/media.js';
@@ -35,34 +31,10 @@ import {
 } from '../types/index.js';
 import axios from 'axios';
 import { prompts } from '../prompts/index.js';
-import { handlePrompts } from '../prompts/handlers.js';
 import { isToolAllowed } from '../utils/capabilities.js';
 
 function constructResourceUri(alias: string, baseUrl: string): string {
     return `wordpress://${alias}@${new URL(baseUrl).hostname}`;
-}
-
-// Helper function to replace argument placeholders in text
-function replaceArgumentPlaceholders(text: string, args: Record<string, unknown>): string {
-    return text.replace(/\{([^}]+)\}/g, (match, key) => {
-        const value = key.split('.').reduce((obj: any, k: string) => obj?.[k], args);
-        return value !== undefined ? String(value) : match;
-    });
-}
-
-interface PromptSchema {
-    type: string;
-    required?: string[];
-    properties?: {
-        [key: string]: {
-            type: string;
-            description: string;
-        };
-    };
-}
-
-interface ExtendedPrompt extends Prompt {
-    schema: PromptSchema;
 }
 
 export function registerTools(server: Server, clients: Map<string, { 

@@ -1,5 +1,3 @@
-import { Prompt } from '@modelcontextprotocol/sdk/types.js';
-
 interface PromptArgument {
     name: string;
     description: string;

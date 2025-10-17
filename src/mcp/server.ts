@@ -3,8 +3,6 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import express, { Express, Response } from 'express';
 import cors from 'cors';
-import { toolCapabilities } from '../tools/index.js';
-import { z } from 'zod';
 
 type ServerCapabilities = {
     [key: string]: unknown;
@@ -13,36 +11,10 @@ type ServerCapabilities = {
     resources?: { listChanged?: boolean };
 };
 
-interface JsonRpcMessage {
-  jsonrpc: '2.0';
-  id?: number | string;
-  method?: string;
-  params?: Record<string, unknown>;
-  result?: Record<string, unknown>;
-  error?: {
-    code: number;
-    message: string;
-    data?: unknown;
-  };
-}
-
 interface Connection {
     id: string;
-    transport: any;
+    transport: unknown;
     initialized: boolean;
-}
-
-interface InitializeRequest {
-    method: 'initialize';
-    params: {
-        capabilities: Record<string, unknown>;
-    };
-    transport: any;
-}
-
-interface ShutdownRequest {
-    method: 'shutdown';
-    transport: any;
 }
 
 export class McpServer {
@@ -68,47 +40,17 @@ export class McpServer {
         this.app.use(cors());
         this.app.use(express.json());
 
-        // Register handlers for initialization and shutdown using Zod schemas
-        const initializeSchema = z.object({
-            method: z.literal('initialize'),
-            params: z.object({
-                capabilities: z.record(z.unknown())
-            })
-        });
-
-        const shutdownSchema = z.object({
-            method: z.literal('shutdown')
-        });
-
-        this.server.setRequestHandler(initializeSchema, async (request) => {
-            if (!this.isValidCapabilities(request.params.capabilities)) {
-                throw {
-                    code: -32602,
-                    message: 'Invalid params: capabilities must be an object'
-                };
-            }
-            return {
-                protocolVersion: '2024-11-05',  // Updated to match specification revision
-                serverInfo: {
-                    name: 'claudeus-wp-mcp',
-                    version: '1.0.0'
-                },
-                capabilities: this.capabilities
-            };
-        });
-
-        this.server.setRequestHandler(shutdownSchema, async () => {
-            return { success: true };
-        });
+        // Note: The MCP SDK handles initialize/shutdown protocol methods automatically
+        // No need to register custom handlers for these
     }
 
-    private trackConnection(transport: any): void {
+    private trackConnection(transport: unknown): void {
         const id = `conn_${this.nextConnectionId++}`;
         this.connections.set(id, { id, transport, initialized: false });
         console.error(`🔌 New connection established: ${id}`);
     }
 
-    private untrackConnection(transport: any): void {
+    private untrackConnection(transport: unknown): void {
         for (const [id, conn] of this.connections.entries()) {
             if (conn.transport === transport) {
                 this.connections.delete(id);
@@ -164,10 +106,6 @@ export class McpServer {
                 resolve();
             });
         });
-    }
-
-    private isValidCapabilities(capabilities: unknown): boolean {
-        return typeof capabilities === 'object' && capabilities !== null && !Array.isArray(capabilities);
     }
 }
 

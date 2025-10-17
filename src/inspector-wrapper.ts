@@ -13,9 +13,25 @@ const nodePath = process.execPath;
 process.env.TRANSPORT_TYPE = 'stdio';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+// Only pass relevant environment variables (filter out system noise)
+const relevantEnvVars = [
+  'WP_SITES_PATH',      // Critical: WordPress sites configuration
+  'TRANSPORT_TYPE',     // MCP transport type
+  'NODE_ENV',           // Node environment
+  'PORT',               // Optional: SSE transport port
+  'PATH',               // Required: For Node.js to find executables
+];
+
+const filteredEnv: Record<string, string> = {};
+for (const key of relevantEnvVars) {
+  if (process.env[key]) {
+    filteredEnv[key] = process.env[key];
+  }
+}
+
 const child = spawn(nodePath, [serverPath], {
   stdio: ['pipe', 'pipe', 'inherit'], // Use pipe for stdin/stdout, inherit stderr
-  env: { ...process.env },
+  env: filteredEnv,
   shell: false
 });
 

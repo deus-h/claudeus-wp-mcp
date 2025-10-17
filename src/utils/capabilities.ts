@@ -68,7 +68,7 @@ export function getAllowedTools(capabilities: SiteCapabilities | undefined): str
     const allowedTools: string[] = [];
 
     // Helper function to process each category
-    const processCategory = (category: keyof SiteCapabilities, prefix: string) => {
+    const processCategory = (category: keyof SiteCapabilities, _prefix: string) => {
         const categoryCapabilities = capabilities[category];
         if (categoryCapabilities) {
             Object.entries(categoryCapabilities).forEach(([tool, isAllowed]) => {
