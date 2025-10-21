@@ -1,0 +1,2582 @@
+{
+    "/wp/v2/blocks": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 10,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "required": false
+              },
+              "after": {
+                "description": "Limit response to posts published after a given ISO8601 compliant date.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "modified_after": {
+                "description": "Limit response to posts modified after a given ISO8601 compliant date.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "before": {
+                "description": "Limit response to posts published before a given ISO8601 compliant date.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "modified_before": {
+                "description": "Limit response to posts modified before a given ISO8601 compliant date.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "exclude": {
+                "description": "Ensure result set excludes specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "include": {
+                "description": "Limit result set to specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "search_semantics": {
+                "description": "How to interpret the search input.",
+                "type": "string",
+                "enum": [
+                  "exact"
+                ],
+                "required": false
+              },
+              "offset": {
+                "description": "Offset the result set by a specific number of items.",
+                "type": "integer",
+                "required": false
+              },
+              "order": {
+                "description": "Order sort attribute ascending or descending.",
+                "type": "string",
+                "default": "desc",
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "required": false
+              },
+              "orderby": {
+                "description": "Sort collection by post attribute.",
+                "type": "string",
+                "default": "date",
+                "enum": [
+                  "author",
+                  "date",
+                  "id",
+                  "include",
+                  "modified",
+                  "parent",
+                  "relevance",
+                  "slug",
+                  "include_slugs",
+                  "title"
+                ],
+                "required": false
+              },
+              "search_columns": {
+                "default": [],
+                "description": "Array of column names to be searched.",
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "post_title",
+                    "post_content",
+                    "post_excerpt"
+                  ],
+                  "type": "string"
+                },
+                "required": false
+              },
+              "slug": {
+                "description": "Limit result set to posts with one or more specific slugs.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "status": {
+                "default": "publish",
+                "description": "Limit result set to posts assigned one or more statuses.",
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "publish",
+                    "future",
+                    "draft",
+                    "pending",
+                    "private",
+                    "trash",
+                    "auto-draft",
+                    "inherit",
+                    "request-pending",
+                    "request-confirmed",
+                    "request-failed",
+                    "request-completed",
+                    "any"
+                  ],
+                  "type": "string"
+                },
+                "required": false
+              },
+              "tax_relation": {
+                "description": "Limit result set based on relationship between multiple taxonomies.",
+                "type": "string",
+                "enum": [
+                  "AND",
+                  "OR"
+                ],
+                "required": false
+              },
+              "wp_pattern_category": {
+                "description": "Limit result set to items with specific terms assigned in the wp_pattern_category taxonomy.",
+                "type": [
+                  "object",
+                  "array"
+                ],
+                "oneOf": [
+                  {
+                    "title": "Term ID List",
+                    "description": "Match terms with the listed IDs.",
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  {
+                    "title": "Term ID Taxonomy Query",
+                    "description": "Perform an advanced term query.",
+                    "type": "object",
+                    "properties": {
+                      "terms": {
+                        "description": "Term IDs.",
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "default": []
+                      },
+                      "operator": {
+                        "description": "Whether items must be assigned all or any of the specified terms.",
+                        "type": "string",
+                        "enum": [
+                          "AND",
+                          "OR"
+                        ],
+                        "default": "OR"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                ],
+                "required": false
+              },
+              "wp_pattern_category_exclude": {
+                "description": "Limit result set to items except those with specific terms assigned in the wp_pattern_category taxonomy.",
+                "type": [
+                  "object",
+                  "array"
+                ],
+                "oneOf": [
+                  {
+                    "title": "Term ID List",
+                    "description": "Match terms with the listed IDs.",
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  {
+                    "title": "Term ID Taxonomy Query",
+                    "description": "Perform an advanced term query.",
+                    "type": "object",
+                    "properties": {
+                      "terms": {
+                        "description": "Term IDs.",
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        },
+                        "default": []
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                ],
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "date": {
+                "description": "The date the post was published, in the site's timezone.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "required": false
+              },
+              "date_gmt": {
+                "description": "The date the post was published, as GMT.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "required": false
+              },
+              "slug": {
+                "description": "An alphanumeric identifier for the post unique to its type.",
+                "type": "string",
+                "required": false
+              },
+              "status": {
+                "description": "A named status for the post.",
+                "type": "string",
+                "enum": [
+                  "publish",
+                  "future",
+                  "draft",
+                  "pending",
+                  "private"
+                ],
+                "required": false
+              },
+              "password": {
+                "description": "A password to protect access to the content and excerpt.",
+                "type": "string",
+                "required": false
+              },
+              "title": {
+                "description": "The title for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Title for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit"
+                    ]
+                  }
+                },
+                "required": false
+              },
+              "content": {
+                "description": "The content for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Content for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit"
+                    ]
+                  },
+                  "block_version": {
+                    "description": "Version of the content block format used by the post.",
+                    "type": "integer",
+                    "context": [
+                      "edit"
+                    ],
+                    "readonly": true
+                  },
+                  "protected": {
+                    "description": "Whether the content is protected with a password.",
+                    "type": "boolean",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "excerpt": {
+                "description": "The excerpt for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Excerpt for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "rendered": {
+                    "description": "HTML excerpt for the post, transformed for display.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  },
+                  "protected": {
+                    "description": "Whether the excerpt is protected with a password.",
+                    "type": "boolean",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": {
+                  "_uag_custom_page_level_css": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "site-sidebar-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-content-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-site-content-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-content-style": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-sidebar-style": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-global-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-banner-title-visibility": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-main-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-above-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-below-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-mobile-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "site-post-title": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-breadcrumbs-content": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-featured-img": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "footer-sml-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "theme-transparent-header-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "adv-header-id-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "stick-header-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-above-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-main-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-below-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "astra-migrate-meta-layouts": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-page-background-enabled": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-page-background-meta": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": {
+                      "desktop": {
+                        "background-color": "var(--ast-global-color-4)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "tablet": {
+                        "background-color": "",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "mobile": {
+                        "background-color": "",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      }
+                    },
+                    "properties": {
+                      "desktop": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "tablet": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "mobile": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "ast-content-background-meta": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": {
+                      "desktop": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "tablet": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "mobile": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      }
+                    },
+                    "properties": {
+                      "desktop": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "tablet": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "mobile": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "wp_pattern_sync_status": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "",
+                    "enum": [
+                      "partial",
+                      "unsynced"
+                    ]
+                  },
+                  "footnotes": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  }
+                },
+                "required": false
+              },
+              "template": {
+                "description": "The theme file to use to display the post.",
+                "type": "string",
+                "required": false
+              },
+              "wp_pattern_category": {
+                "description": "The terms assigned to the post in the wp_pattern_category taxonomy.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/blocks"
+            }
+          ]
+        }
+      },
+      "/wp/v2/blocks/(?P<id>[\\d]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the post.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "excerpt_length": {
+                "description": "Override the default excerpt length.",
+                "type": "integer",
+                "required": false
+              },
+              "password": {
+                "description": "The password for the post if it is password protected.",
+                "type": "string",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the post.",
+                "type": "integer",
+                "required": false
+              },
+              "date": {
+                "description": "The date the post was published, in the site's timezone.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "required": false
+              },
+              "date_gmt": {
+                "description": "The date the post was published, as GMT.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "required": false
+              },
+              "slug": {
+                "description": "An alphanumeric identifier for the post unique to its type.",
+                "type": "string",
+                "required": false
+              },
+              "status": {
+                "description": "A named status for the post.",
+                "type": "string",
+                "enum": [
+                  "publish",
+                  "future",
+                  "draft",
+                  "pending",
+                  "private"
+                ],
+                "required": false
+              },
+              "password": {
+                "description": "A password to protect access to the content and excerpt.",
+                "type": "string",
+                "required": false
+              },
+              "title": {
+                "description": "The title for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Title for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit"
+                    ]
+                  }
+                },
+                "required": false
+              },
+              "content": {
+                "description": "The content for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Content for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit"
+                    ]
+                  },
+                  "block_version": {
+                    "description": "Version of the content block format used by the post.",
+                    "type": "integer",
+                    "context": [
+                      "edit"
+                    ],
+                    "readonly": true
+                  },
+                  "protected": {
+                    "description": "Whether the content is protected with a password.",
+                    "type": "boolean",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "excerpt": {
+                "description": "The excerpt for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Excerpt for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "rendered": {
+                    "description": "HTML excerpt for the post, transformed for display.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  },
+                  "protected": {
+                    "description": "Whether the excerpt is protected with a password.",
+                    "type": "boolean",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": {
+                  "_uag_custom_page_level_css": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "site-sidebar-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-content-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-site-content-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-content-style": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-sidebar-style": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-global-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-banner-title-visibility": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-main-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-above-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-below-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-mobile-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "site-post-title": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-breadcrumbs-content": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-featured-img": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "footer-sml-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "theme-transparent-header-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "adv-header-id-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "stick-header-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-above-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-main-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-below-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "astra-migrate-meta-layouts": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-page-background-enabled": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-page-background-meta": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": {
+                      "desktop": {
+                        "background-color": "var(--ast-global-color-4)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "tablet": {
+                        "background-color": "",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "mobile": {
+                        "background-color": "",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      }
+                    },
+                    "properties": {
+                      "desktop": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "tablet": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "mobile": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "ast-content-background-meta": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": {
+                      "desktop": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "tablet": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "mobile": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      }
+                    },
+                    "properties": {
+                      "desktop": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "tablet": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "mobile": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "wp_pattern_sync_status": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "",
+                    "enum": [
+                      "partial",
+                      "unsynced"
+                    ]
+                  },
+                  "footnotes": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  }
+                },
+                "required": false
+              },
+              "template": {
+                "description": "The theme file to use to display the post.",
+                "type": "string",
+                "required": false
+              },
+              "wp_pattern_category": {
+                "description": "The terms assigned to the post in the wp_pattern_category taxonomy.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the post.",
+                "type": "integer",
+                "required": false
+              },
+              "force": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to bypass Trash and force deletion.",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/blocks/(?P<parent>[\\d]+)/revisions": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "parent": {
+                "description": "The ID for the parent of the revision.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "required": false
+              },
+              "exclude": {
+                "description": "Ensure result set excludes specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "include": {
+                "description": "Limit result set to specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "offset": {
+                "description": "Offset the result set by a specific number of items.",
+                "type": "integer",
+                "required": false
+              },
+              "order": {
+                "description": "Order sort attribute ascending or descending.",
+                "type": "string",
+                "default": "desc",
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "required": false
+              },
+              "orderby": {
+                "description": "Sort collection by object attribute.",
+                "type": "string",
+                "default": "date",
+                "enum": [
+                  "date",
+                  "id",
+                  "include",
+                  "relevance",
+                  "slug",
+                  "include_slugs",
+                  "title"
+                ],
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/blocks/(?P<parent>[\\d]+)/revisions/(?P<id>[\\d]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "parent": {
+                "description": "The ID for the parent of the revision.",
+                "type": "integer",
+                "required": false
+              },
+              "id": {
+                "description": "Unique identifier for the revision.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": {
+              "parent": {
+                "description": "The ID for the parent of the revision.",
+                "type": "integer",
+                "required": false
+              },
+              "id": {
+                "description": "Unique identifier for the revision.",
+                "type": "integer",
+                "required": false
+              },
+              "force": {
+                "type": "boolean",
+                "default": false,
+                "description": "Required to be true, as revisions do not support trashing.",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/blocks/(?P<id>[\\d]+)/autosaves": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "parent": {
+                "description": "The ID for the parent of the autosave.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "parent": {
+                "description": "The ID for the parent of the autosave.",
+                "type": "integer",
+                "required": false
+              },
+              "date": {
+                "description": "The date the post was published, in the site's timezone.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "required": false
+              },
+              "date_gmt": {
+                "description": "The date the post was published, as GMT.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time",
+                "required": false
+              },
+              "slug": {
+                "description": "An alphanumeric identifier for the post unique to its type.",
+                "type": "string",
+                "required": false
+              },
+              "status": {
+                "description": "A named status for the post.",
+                "type": "string",
+                "enum": [
+                  "publish",
+                  "future",
+                  "draft",
+                  "pending",
+                  "private"
+                ],
+                "required": false
+              },
+              "password": {
+                "description": "A password to protect access to the content and excerpt.",
+                "type": "string",
+                "required": false
+              },
+              "title": {
+                "description": "The title for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Title for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit"
+                    ]
+                  }
+                },
+                "required": false
+              },
+              "content": {
+                "description": "The content for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Content for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit"
+                    ]
+                  },
+                  "block_version": {
+                    "description": "Version of the content block format used by the post.",
+                    "type": "integer",
+                    "context": [
+                      "edit"
+                    ],
+                    "readonly": true
+                  },
+                  "protected": {
+                    "description": "Whether the content is protected with a password.",
+                    "type": "boolean",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "excerpt": {
+                "description": "The excerpt for the post.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Excerpt for the post, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "rendered": {
+                    "description": "HTML excerpt for the post, transformed for display.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  },
+                  "protected": {
+                    "description": "Whether the excerpt is protected with a password.",
+                    "type": "boolean",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": {
+                  "_uag_custom_page_level_css": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "site-sidebar-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-content-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-site-content-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-content-style": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "site-sidebar-style": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-global-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-banner-title-visibility": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-main-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-above-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-below-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-hfb-mobile-header-display": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "site-post-title": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-breadcrumbs-content": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "ast-featured-img": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "footer-sml-layout": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "theme-transparent-header-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "adv-header-id-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "stick-header-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-above-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-main-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "header-below-stick-meta": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  },
+                  "astra-migrate-meta-layouts": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-page-background-enabled": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "default"
+                  },
+                  "ast-page-background-meta": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": {
+                      "desktop": {
+                        "background-color": "var(--ast-global-color-4)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "tablet": {
+                        "background-color": "",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "mobile": {
+                        "background-color": "",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      }
+                    },
+                    "properties": {
+                      "desktop": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "tablet": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "mobile": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "ast-content-background-meta": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": {
+                      "desktop": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "tablet": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      },
+                      "mobile": {
+                        "background-color": "var(--ast-global-color-5)",
+                        "background-image": "",
+                        "background-repeat": "repeat",
+                        "background-position": "center center",
+                        "background-size": "auto",
+                        "background-attachment": "scroll",
+                        "background-type": "",
+                        "background-media": "",
+                        "overlay-type": "",
+                        "overlay-color": "",
+                        "overlay-opacity": "",
+                        "overlay-gradient": ""
+                      }
+                    },
+                    "properties": {
+                      "desktop": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "tablet": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "mobile": {
+                        "type": "object",
+                        "properties": {
+                          "background-color": {
+                            "type": "string"
+                          },
+                          "background-image": {
+                            "type": "string"
+                          },
+                          "background-repeat": {
+                            "type": "string"
+                          },
+                          "background-position": {
+                            "type": "string"
+                          },
+                          "background-size": {
+                            "type": "string"
+                          },
+                          "background-attachment": {
+                            "type": "string"
+                          },
+                          "background-type": {
+                            "type": "string"
+                          },
+                          "background-media": {
+                            "type": "string"
+                          },
+                          "overlay-type": {
+                            "type": "string"
+                          },
+                          "overlay-color": {
+                            "type": "string"
+                          },
+                          "overlay-opacity": {
+                            "type": "string"
+                          },
+                          "overlay-gradient": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "wp_pattern_sync_status": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": "",
+                    "enum": [
+                      "partial",
+                      "unsynced"
+                    ]
+                  },
+                  "footnotes": {
+                    "type": "string",
+                    "title": "",
+                    "description": "",
+                    "default": ""
+                  }
+                },
+                "required": false
+              },
+              "template": {
+                "description": "The theme file to use to display the post.",
+                "type": "string",
+                "required": false
+              },
+              "wp_pattern_category": {
+                "description": "The terms assigned to the post in the wp_pattern_category taxonomy.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/blocks/(?P<parent>[\\d]+)/autosaves/(?P<id>[\\d]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "parent": {
+                "description": "The ID for the parent of the autosave.",
+                "type": "integer",
+                "required": false
+              },
+              "id": {
+                "description": "The ID for the autosave.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ]
+      }
+}

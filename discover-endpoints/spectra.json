@@ -1,0 +1,95 @@
+{
+    "/spectra/v1": {
+        "namespace": "spectra/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "spectra/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/spectra/v1"
+            }
+          ]
+        }
+      },
+      "/spectra/v1/all_taxonomy": {
+        "namespace": "spectra/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/spectra/v1/all_taxonomy"
+            }
+          ]
+        }
+      },
+      "/spectra/v1/editor": {
+        "namespace": "spectra/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/spectra/v1/editor"
+            }
+          ]
+        }
+      },
+      "/spectra/v1/check-custom-fields-support": {
+        "namespace": "spectra/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/spectra/v1/check-custom-fields-support"
+            }
+          ]
+        }
+      }
+}

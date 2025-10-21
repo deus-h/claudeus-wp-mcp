@@ -33,42 +33,22 @@ export async function handleShopTools(name: string, args: Record<string, unknown
         case 'claudeus_wp_shop__get_products': {
             const filters = parseFilters(args.filters);
             const response = await shopAPI.getProducts(filters as ProductFilters);
-            const totalProducts = parseInt(response.headers['x-wp-total'] || '0');
-            const totalPages = parseInt(response.headers['x-wp-totalpages'] || '1');
             
             return {
                 content: [{
                     type: "text",
-                    text: JSON.stringify({
-                        data: response.data,
-                        pagination: {
-                            total: totalProducts,
-                            totalPages: totalPages,
-                            currentPage: (filters as ProductFilters)?.page || 1,
-                            perPage: (filters as ProductFilters)?.per_page || 10
-                        }
-                    }, null, 2)
+                    text: JSON.stringify(response, null, 2)
                 }]
             };
         }
         case 'claudeus_wp_shop__get_orders': {
             const filters = parseFilters(args.filters);
             const response = await shopAPI.getOrders(filters as OrderFilters);
-            const totalOrders = parseInt(response.headers['x-wp-total'] || '0');
-            const totalPages = parseInt(response.headers['x-wp-totalpages'] || '1');
             
             return {
                 content: [{
                     type: "text",
-                    text: JSON.stringify({
-                        data: response.data,
-                        pagination: {
-                            total: totalOrders,
-                            totalPages: totalPages,
-                            currentPage: (filters as OrderFilters)?.page || 1,
-                            perPage: (filters as OrderFilters)?.per_page || 10
-                        }
-                    }, null, 2)
+                    text: JSON.stringify(response, null, 2)
                 }]
             };
         }
@@ -78,7 +58,7 @@ export async function handleShopTools(name: string, args: Record<string, unknown
             return {
                 content: [{
                     type: "text",
-                    text: JSON.stringify(response.data, null, 2)
+                    text: JSON.stringify(response, null, 2)
                 }]
             };
         }

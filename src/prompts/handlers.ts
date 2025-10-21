@@ -63,8 +63,8 @@ export async function handlePrompts(
             const { post_id, target_keywords = [] } = typedArgs;
             
             // Get the post content
-            const posts = await client.posts.getPosts({ include: [post_id] } as PostFilters);
-            const post = posts[0];
+            const response = await client.posts.getPosts({ include: [post_id] } as PostFilters);
+            const post = response.data[0];
             
             if (!post) {
                 throw new Error(`Post not found: ${post_id}`);

@@ -1,0 +1,1205 @@
+{
+    "/wp/v2/users": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 10,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "required": false
+              },
+              "exclude": {
+                "description": "Ensure result set excludes specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "include": {
+                "description": "Limit result set to specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "offset": {
+                "description": "Offset the result set by a specific number of items.",
+                "type": "integer",
+                "required": false
+              },
+              "order": {
+                "default": "asc",
+                "description": "Order sort attribute ascending or descending.",
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "type": "string",
+                "required": false
+              },
+              "orderby": {
+                "default": "name",
+                "description": "Sort collection by user attribute.",
+                "enum": [
+                  "id",
+                  "include",
+                  "name",
+                  "registered_date",
+                  "slug",
+                  "include_slugs",
+                  "email",
+                  "url"
+                ],
+                "type": "string",
+                "required": false
+              },
+              "slug": {
+                "description": "Limit result set to users with one or more specific slugs.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "roles": {
+                "description": "Limit result set to users matching at least one specific role provided. Accepts csv list or single role.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "capabilities": {
+                "description": "Limit result set to users matching at least one specific capability provided. Accepts csv list or single capability.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "who": {
+                "description": "Limit result set to users who are considered authors.",
+                "type": "string",
+                "enum": [
+                  "authors"
+                ],
+                "required": false
+              },
+              "has_published_posts": {
+                "description": "Limit result set to users who have published posts.",
+                "type": [
+                  "boolean",
+                  "array"
+                ],
+                "items": {
+                  "type": "string",
+                  "enum": {
+                    "post": "post",
+                    "page": "page",
+                    "attachment": "attachment",
+                    "nav_menu_item": "nav_menu_item",
+                    "wp_block": "wp_block",
+                    "wp_template": "wp_template",
+                    "wp_template_part": "wp_template_part",
+                    "wp_global_styles": "wp_global_styles",
+                    "wp_navigation": "wp_navigation",
+                    "wp_font_family": "wp_font_family",
+                    "wp_font_face": "wp_font_face",
+                    "spectra-popup": "spectra-popup",
+                    "sureforms_form": "sureforms_form",
+                    "astra-advanced-hook": "astra-advanced-hook"
+                  }
+                },
+                "required": false
+              },
+              "search_columns": {
+                "default": [],
+                "description": "Array of column names to be searched.",
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "email",
+                    "name",
+                    "id",
+                    "username",
+                    "slug"
+                  ],
+                  "type": "string"
+                },
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "username": {
+                "description": "Login name for the user.",
+                "type": "string",
+                "required": true
+              },
+              "name": {
+                "description": "Display name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "first_name": {
+                "description": "First name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "last_name": {
+                "description": "Last name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "email": {
+                "description": "The email address for the user.",
+                "type": "string",
+                "format": "email",
+                "required": true
+              },
+              "url": {
+                "description": "URL of the user.",
+                "type": "string",
+                "format": "uri",
+                "required": false
+              },
+              "description": {
+                "description": "Description of the user.",
+                "type": "string",
+                "required": false
+              },
+              "locale": {
+                "description": "Locale for the user.",
+                "type": "string",
+                "enum": [
+                  "",
+                  "en_US"
+                ],
+                "required": false
+              },
+              "nickname": {
+                "description": "The nickname for the user.",
+                "type": "string",
+                "required": false
+              },
+              "slug": {
+                "description": "An alphanumeric identifier for the user.",
+                "type": "string",
+                "required": false
+              },
+              "roles": {
+                "description": "Roles assigned to the user.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "password": {
+                "description": "Password for the user (never included).",
+                "type": "string",
+                "required": true
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": {
+                  "persisted_preferences": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": [],
+                    "context": [
+                      "edit"
+                    ],
+                    "properties": {
+                      "_modified": {
+                        "description": "The date and time the preferences were updated.",
+                        "type": "string",
+                        "format": "date-time",
+                        "readonly": false
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/users"
+            }
+          ]
+        }
+      },
+      "/wp/v2/users/(?P<id>[\\d]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the user.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the user.",
+                "type": "integer",
+                "required": false
+              },
+              "username": {
+                "description": "Login name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "name": {
+                "description": "Display name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "first_name": {
+                "description": "First name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "last_name": {
+                "description": "Last name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "email": {
+                "description": "The email address for the user.",
+                "type": "string",
+                "format": "email",
+                "required": false
+              },
+              "url": {
+                "description": "URL of the user.",
+                "type": "string",
+                "format": "uri",
+                "required": false
+              },
+              "description": {
+                "description": "Description of the user.",
+                "type": "string",
+                "required": false
+              },
+              "locale": {
+                "description": "Locale for the user.",
+                "type": "string",
+                "enum": [
+                  "",
+                  "en_US"
+                ],
+                "required": false
+              },
+              "nickname": {
+                "description": "The nickname for the user.",
+                "type": "string",
+                "required": false
+              },
+              "slug": {
+                "description": "An alphanumeric identifier for the user.",
+                "type": "string",
+                "required": false
+              },
+              "roles": {
+                "description": "Roles assigned to the user.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "password": {
+                "description": "Password for the user (never included).",
+                "type": "string",
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": {
+                  "persisted_preferences": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": [],
+                    "context": [
+                      "edit"
+                    ],
+                    "properties": {
+                      "_modified": {
+                        "description": "The date and time the preferences were updated.",
+                        "type": "string",
+                        "format": "date-time",
+                        "readonly": false
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the user.",
+                "type": "integer",
+                "required": false
+              },
+              "force": {
+                "type": "boolean",
+                "default": false,
+                "description": "Required to be true, as users do not support trashing.",
+                "required": false
+              },
+              "reassign": {
+                "type": "integer",
+                "description": "Reassign the deleted user's posts and links to this user ID.",
+                "required": true
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/users/me": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "username": {
+                "description": "Login name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "name": {
+                "description": "Display name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "first_name": {
+                "description": "First name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "last_name": {
+                "description": "Last name for the user.",
+                "type": "string",
+                "required": false
+              },
+              "email": {
+                "description": "The email address for the user.",
+                "type": "string",
+                "format": "email",
+                "required": false
+              },
+              "url": {
+                "description": "URL of the user.",
+                "type": "string",
+                "format": "uri",
+                "required": false
+              },
+              "description": {
+                "description": "Description of the user.",
+                "type": "string",
+                "required": false
+              },
+              "locale": {
+                "description": "Locale for the user.",
+                "type": "string",
+                "enum": [
+                  "",
+                  "en_US"
+                ],
+                "required": false
+              },
+              "nickname": {
+                "description": "The nickname for the user.",
+                "type": "string",
+                "required": false
+              },
+              "slug": {
+                "description": "An alphanumeric identifier for the user.",
+                "type": "string",
+                "required": false
+              },
+              "roles": {
+                "description": "Roles assigned to the user.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "required": false
+              },
+              "password": {
+                "description": "Password for the user (never included).",
+                "type": "string",
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": {
+                  "persisted_preferences": {
+                    "type": "object",
+                    "title": "",
+                    "description": "",
+                    "default": [],
+                    "context": [
+                      "edit"
+                    ],
+                    "properties": {
+                      "_modified": {
+                        "description": "The date and time the preferences were updated.",
+                        "type": "string",
+                        "format": "date-time",
+                        "readonly": false
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                },
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": {
+              "force": {
+                "type": "boolean",
+                "default": false,
+                "description": "Required to be true, as users do not support trashing.",
+                "required": false
+              },
+              "reassign": {
+                "type": "integer",
+                "description": "Reassign the deleted user's posts and links to this user ID.",
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/users/me"
+            }
+          ]
+        }
+      },
+      "/wp/v2/users/(?P<user_id>(?:[\\d]+|me))/application-passwords": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "app_id": {
+                "description": "A UUID provided by the application to uniquely identify it. It is recommended to use an UUID v5 with the URL or DNS namespace.",
+                "type": "string",
+                "format": "uuid",
+                "required": false
+              },
+              "name": {
+                "description": "The name of the application password.",
+                "type": "string",
+                "minLength": 1,
+                "pattern": ".*\\S.*",
+                "required": true
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": []
+          }
+        ]
+      },
+      "/wp/v2/users/(?P<user_id>(?:[\\d]+|me))/application-passwords/introspect": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/users/(?P<user_id>(?:[\\d]+|me))/application-passwords/(?P<uuid>[\\w\\-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "app_id": {
+                "description": "A UUID provided by the application to uniquely identify it. It is recommended to use an UUID v5 with the URL or DNS namespace.",
+                "type": "string",
+                "format": "uuid",
+                "required": false
+              },
+              "name": {
+                "description": "The name of the application password.",
+                "type": "string",
+                "minLength": 1,
+                "pattern": ".*\\S.*",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": []
+          }
+        ]
+      },
+      "/wp/v2/comments": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 10,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "required": false
+              },
+              "after": {
+                "description": "Limit response to comments published after a given ISO8601 compliant date.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "author": {
+                "description": "Limit result set to comments assigned to specific user IDs. Requires authorization.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              },
+              "author_exclude": {
+                "description": "Ensure result set excludes comments assigned to specific user IDs. Requires authorization.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              },
+              "author_email": {
+                "default": null,
+                "description": "Limit result set to that from a specific author email. Requires authorization.",
+                "format": "email",
+                "type": "string",
+                "required": false
+              },
+              "before": {
+                "description": "Limit response to comments published before a given ISO8601 compliant date.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "exclude": {
+                "description": "Ensure result set excludes specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "include": {
+                "description": "Limit result set to specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "offset": {
+                "description": "Offset the result set by a specific number of items.",
+                "type": "integer",
+                "required": false
+              },
+              "order": {
+                "description": "Order sort attribute ascending or descending.",
+                "type": "string",
+                "default": "desc",
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "required": false
+              },
+              "orderby": {
+                "description": "Sort collection by comment attribute.",
+                "type": "string",
+                "default": "date_gmt",
+                "enum": [
+                  "date",
+                  "date_gmt",
+                  "id",
+                  "include",
+                  "post",
+                  "parent",
+                  "type"
+                ],
+                "required": false
+              },
+              "parent": {
+                "default": [],
+                "description": "Limit result set to comments of specific parent IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              },
+              "parent_exclude": {
+                "default": [],
+                "description": "Ensure result set excludes specific parent IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              },
+              "post": {
+                "default": [],
+                "description": "Limit result set to comments assigned to specific post IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "required": false
+              },
+              "status": {
+                "default": "approve",
+                "description": "Limit result set to comments assigned a specific status. Requires authorization.",
+                "type": "string",
+                "required": false
+              },
+              "type": {
+                "default": "comment",
+                "description": "Limit result set to comments assigned a specific type. Requires authorization.",
+                "type": "string",
+                "required": false
+              },
+              "password": {
+                "description": "The password for the post if it is password protected.",
+                "type": "string",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "author": {
+                "description": "The ID of the user object, if author was a user.",
+                "type": "integer",
+                "required": false
+              },
+              "author_email": {
+                "description": "Email address for the comment author.",
+                "type": "string",
+                "format": "email",
+                "required": false
+              },
+              "author_ip": {
+                "description": "IP address for the comment author.",
+                "type": "string",
+                "format": "ip",
+                "required": false
+              },
+              "author_name": {
+                "description": "Display name for the comment author.",
+                "type": "string",
+                "required": false
+              },
+              "author_url": {
+                "description": "URL for the comment author.",
+                "type": "string",
+                "format": "uri",
+                "required": false
+              },
+              "author_user_agent": {
+                "description": "User agent for the comment author.",
+                "type": "string",
+                "required": false
+              },
+              "content": {
+                "description": "The content for the comment.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Content for the comment, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "rendered": {
+                    "description": "HTML content for the comment, transformed for display.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "date": {
+                "description": "The date the comment was published, in the site's timezone.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "date_gmt": {
+                "description": "The date the comment was published, as GMT.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "parent": {
+                "default": 0,
+                "description": "The ID for the parent of the comment.",
+                "type": "integer",
+                "required": false
+              },
+              "post": {
+                "default": 0,
+                "description": "The ID of the associated post object.",
+                "type": "integer",
+                "required": false
+              },
+              "status": {
+                "description": "State of the comment.",
+                "type": "string",
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": [],
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/comments"
+            }
+          ]
+        }
+      },
+      "/wp/v2/comments/(?P<id>[\\d]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "id": {
+                "description": "Unique identifier for the comment.",
+                "type": "integer",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "password": {
+                "description": "The password for the parent post of the comment (if the post is password protected).",
+                "type": "string",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "id": {
+                "description": "Unique identifier for the comment.",
+                "type": "integer",
+                "required": false
+              },
+              "author": {
+                "description": "The ID of the user object, if author was a user.",
+                "type": "integer",
+                "required": false
+              },
+              "author_email": {
+                "description": "Email address for the comment author.",
+                "type": "string",
+                "format": "email",
+                "required": false
+              },
+              "author_ip": {
+                "description": "IP address for the comment author.",
+                "type": "string",
+                "format": "ip",
+                "required": false
+              },
+              "author_name": {
+                "description": "Display name for the comment author.",
+                "type": "string",
+                "required": false
+              },
+              "author_url": {
+                "description": "URL for the comment author.",
+                "type": "string",
+                "format": "uri",
+                "required": false
+              },
+              "author_user_agent": {
+                "description": "User agent for the comment author.",
+                "type": "string",
+                "required": false
+              },
+              "content": {
+                "description": "The content for the comment.",
+                "type": "object",
+                "properties": {
+                  "raw": {
+                    "description": "Content for the comment, as it exists in the database.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "rendered": {
+                    "description": "HTML content for the comment, transformed for display.",
+                    "type": "string",
+                    "context": [
+                      "view",
+                      "edit",
+                      "embed"
+                    ],
+                    "readonly": true
+                  }
+                },
+                "required": false
+              },
+              "date": {
+                "description": "The date the comment was published, in the site's timezone.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "date_gmt": {
+                "description": "The date the comment was published, as GMT.",
+                "type": "string",
+                "format": "date-time",
+                "required": false
+              },
+              "parent": {
+                "description": "The ID for the parent of the comment.",
+                "type": "integer",
+                "required": false
+              },
+              "post": {
+                "description": "The ID of the associated post object.",
+                "type": "integer",
+                "required": false
+              },
+              "status": {
+                "description": "State of the comment.",
+                "type": "string",
+                "required": false
+              },
+              "meta": {
+                "description": "Meta fields.",
+                "type": "object",
+                "properties": [],
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": {
+              "id": {
+                "description": "Unique identifier for the comment.",
+                "type": "integer",
+                "required": false
+              },
+              "force": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to bypass Trash and force deletion.",
+                "required": false
+              },
+              "password": {
+                "description": "The password for the parent post of the comment (if the post is password protected).",
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ]
+      }
+}

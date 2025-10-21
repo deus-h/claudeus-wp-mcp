@@ -6,6 +6,21 @@ export * from './page.js';
 export * from './media.js';
 export * from './block.js';
 export * from './theme.js';
+export * from './taxonomy.js';
+export * from './pagination.js';
+export * from './user.js';
+export * from './comment.js';
+export * from './menu.js';
+export * from './astra-mega-menu.js';
+export * from './astra-custom-layout.js';
+export * from './template.js';
+export * from './global-styles.js';
+export * from './pattern.js';
+export * from './settings.js';
+export * from './plugin.js';
+export * from './widget.js';
+export * from './health.js';
+export * from './search.js';
 
 export interface PostFilters extends QueryParams {
     status?: 'publish' | 'draft' | 'pending' | 'private';

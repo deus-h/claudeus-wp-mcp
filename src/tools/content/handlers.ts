@@ -139,12 +139,168 @@ export async function handleContentTools(name: string, args: Record<string, unkn
                 }]
             };
         }
-        case 'claudeus_wp_content__get_block_revisions': {
-            const revisions = await client.get<any[]>(`/wp/v2/blocks/${args.id}/revisions`);
+        // Post Revisions & Autosaves
+        case 'claudeus_wp_content__get_post_revisions': {
+            const revisions = await client.get(`/wp/v2/posts/${args.id}/revisions`);
             return {
                 content: [{
                     type: "text",
                     text: JSON.stringify(revisions, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_post_revision': {
+            const revision = await client.get(`/wp/v2/posts/${args.id}/revisions/${args.revision_id}`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(revision, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__delete_post_revision': {
+            const result = await client.delete(`/wp/v2/posts/${args.id}/revisions/${args.revision_id}?force=true`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(result, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_post_autosaves': {
+            const autosaves = await client.get(`/wp/v2/posts/${args.id}/autosaves`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosaves, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_post_autosave': {
+            const autosave = await client.get(`/wp/v2/posts/${args.id}/autosaves/${args.autosave_id}`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosave, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__create_post_autosave': {
+            const autosave = await client.post(`/wp/v2/posts/${args.id}/autosaves`, args.data);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosave, null, 2)
+                }]
+            };
+        }
+        // Page Revisions & Autosaves
+        case 'claudeus_wp_content__get_page_revisions': {
+            const revisions = await client.get(`/wp/v2/pages/${args.id}/revisions`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(revisions, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_page_revision': {
+            const revision = await client.get(`/wp/v2/pages/${args.id}/revisions/${args.revision_id}`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(revision, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__delete_page_revision': {
+            const result = await client.delete(`/wp/v2/pages/${args.id}/revisions/${args.revision_id}?force=true`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(result, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_page_autosaves': {
+            const autosaves = await client.get(`/wp/v2/pages/${args.id}/autosaves`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosaves, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_page_autosave': {
+            const autosave = await client.get(`/wp/v2/pages/${args.id}/autosaves/${args.autosave_id}`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosave, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__create_page_autosave': {
+            const autosave = await client.post(`/wp/v2/pages/${args.id}/autosaves`, args.data);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosave, null, 2)
+                }]
+            };
+        }
+        // Block Revisions & Autosaves
+        case 'claudeus_wp_content__get_block_revisions': {
+            const revisions = await client.get(`/wp/v2/blocks/${args.id}/revisions`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(revisions, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_block_revision': {
+            const revision = await client.get(`/wp/v2/blocks/${args.id}/revisions/${args.revision_id}`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(revision, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__delete_block_revision': {
+            const result = await client.delete(`/wp/v2/blocks/${args.id}/revisions/${args.revision_id}?force=true`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(result, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_block_autosaves': {
+            const autosaves = await client.get(`/wp/v2/blocks/${args.id}/autosaves`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosaves, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__get_block_autosave': {
+            const autosave = await client.get(`/wp/v2/blocks/${args.id}/autosaves/${args.autosave_id}`);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosave, null, 2)
+                }]
+            };
+        }
+        case 'claudeus_wp_content__create_block_autosave': {
+            const autosave = await client.post(`/wp/v2/blocks/${args.id}/autosaves`, args.data);
+            return {
+                content: [{
+                    type: "text",
+                    text: JSON.stringify(autosave, null, 2)
                 }]
             };
         }

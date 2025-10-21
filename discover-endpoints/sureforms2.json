@@ -1,0 +1,413 @@
+{
+    "/sureforms/v1": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "sureforms/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/submit-form": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/submit-form"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/forms-data": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/forms-data"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/sureforms_import": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/sureforms_import"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/generate-form-markup": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/generate-form-markup"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/create-new-form": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/create-new-form"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/srfm-global-settings": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST",
+          "PUT",
+          "PATCH",
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": []
+          },
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/srfm-global-settings"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/send-test-email-summary": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/send-test-email-summary"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/after-submission/(?P<submission_id>[0-9]+)": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "submission_id": {
+                "required": true
+              }
+            }
+          }
+        ]
+      },
+      "/sureforms/v1/generate-form": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "use_system_message": {
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/generate-form"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/map-fields": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/map-fields"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/initiate-auth": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/initiate-auth"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/handle-access-key": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/handle-access-key"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/entries-chart-data": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/entries-chart-data"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/form-data": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/form-data"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/onboarding/set-status": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/onboarding/set-status"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/onboarding/get-status": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/onboarding/get-status"
+            }
+          ]
+        }
+      },
+      "/sureforms/v1/plugin-status": {
+        "namespace": "sureforms/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "plugin": {
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/sureforms/v1/plugin-status"
+            }
+          ]
+        }
+      }
+}

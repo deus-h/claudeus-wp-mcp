@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { SiteConfig, ErrorResponse } from '../types/index.js';
+import { SiteConfig, ErrorResponse, PaginatedResponse, createPaginationMeta } from '../types/index.js';
 
 export type QueryParams = Record<string, string | number | boolean | Array<string | number> | null | undefined>;
 
@@ -55,6 +55,30 @@ export class BaseApiClient {
     try {
       const response = await this.client.get(endpoint, { params });
       return response.data;
+    } catch (error) {
+      this.handleError(error as AxiosError<ErrorResponse>);
+    }
+  }
+
+  /**
+   * GET request with pagination metadata
+   * Extracts X-WP-Total and X-WP-TotalPages headers
+   */
+  public async getPaginated<T>(endpoint: string, params?: QueryParams): Promise<PaginatedResponse<T>> {
+    try {
+      const response = await this.client.get(endpoint, { params });
+      
+      // Extract pagination metadata from headers
+      const pagination = createPaginationMeta(
+        response.headers as Record<string, string>,
+        params?.page as number || 1,
+        params?.per_page as number || 10
+      );
+      
+      return {
+        data: response.data,
+        pagination
+      };
     } catch (error) {
       this.handleError(error as AxiosError<ErrorResponse>);
     }

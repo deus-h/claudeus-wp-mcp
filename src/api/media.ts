@@ -1,12 +1,13 @@
 import { BaseApiClient } from './base-client.js';
 import { Media, MediaData, MediaFilters } from '../types/media.js';
+import { PaginatedResponse } from '../types/pagination.js';
 import FormData from 'form-data';
 import { AxiosError } from 'axios';
 import { ErrorResponse } from '../types/config.js';
 
 export class MediaApiClient extends BaseApiClient {
-    async getMedia(filters?: MediaFilters): Promise<Media[]> {
-        return this.get<Media[]>('/media', filters);
+    async getMedia(filters?: MediaFilters): Promise<PaginatedResponse<Media[]>> {
+        return this.getPaginated<Media[]>('/media', filters);
     }
 
     async getMediaItem(id: number): Promise<Media> {
