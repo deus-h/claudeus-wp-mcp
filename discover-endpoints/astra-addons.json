@@ -1,0 +1,192 @@
+{
+    "/astra/v1": {
+        "namespace": "astra/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "astra/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/astra/v1"
+            }
+          ]
+        }
+      },
+      "/astra/v1/admin/settings": {
+        "namespace": "astra/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/astra/v1/admin/settings"
+            }
+          ]
+        }
+      },
+      "/astra-addon/v1": {
+        "namespace": "astra-addon/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "astra-addon/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/astra-addon/v1"
+            }
+          ]
+        }
+      },
+      "/astra-addon/v1/custom-layouts": {
+        "namespace": "astra-addon/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/astra-addon/v1/custom-layouts"
+            }
+          ]
+        }
+      },
+      "/astra-addon/v1/custom-layouts/(?P<id>\\d+)": {
+        "namespace": "astra-addon/v1",
+        "methods": [
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": {
+              "id": {
+                "type": "integer",
+                "required": true
+              }
+            }
+          }
+        ]
+      },
+      "/astra_addon/v1": {
+        "namespace": "astra_addon/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "astra_addon/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/astra_addon/v1"
+            }
+          ]
+        }
+      },
+      "/astra_addon/v1/mega_menu/(?P<id>\\d+)": {
+        "namespace": "astra_addon/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ]
+      },
+      "/astra_addon/v1/mega_menu": {
+        "namespace": "astra_addon/v1",
+        "methods": [
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/astra_addon/v1/mega_menu"
+            }
+          ]
+        }
+      }
+}

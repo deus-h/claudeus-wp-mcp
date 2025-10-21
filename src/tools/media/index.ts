@@ -1,4 +1,5 @@
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { SITE_PARAM, ID_PARAM, FORCE_DELETE_PARAM } from '../schemas/common.js';
 
 export const mediaTools: Tool[] = [{
   name: 'claudeus_wp_media__get_media',
@@ -6,11 +7,10 @@ export const mediaTools: Tool[] = [{
   inputSchema: {
     type: 'object',
     properties: {
-      site: { type: 'string', description: 'Site alias' },
+      site: SITE_PARAM,
       filters: {
         type: 'object',
-        description: 'Optional filters for media query',
-        required: false
+        description: 'Optional filters for media query'
       }
     },
     required: ['site']
@@ -21,41 +21,33 @@ export const mediaTools: Tool[] = [{
   inputSchema: {
     type: 'object',
     properties: {
-      site: { type: 'string', description: 'Site alias' },
+      site: SITE_PARAM,
       file: {
         type: 'string',
-        description: 'Base64 encoded file content',
-        required: true
+        description: 'Base64 encoded file content'
       },
       filename: {
         type: 'string',
-        description: 'Name of the file',
-        required: true
+        description: 'Filename for the uploaded file'
       },
       data: {
         type: 'object',
-        description: 'Additional media data',
-        required: false
+        description: 'Optional media metadata (title, alt_text, caption, description)'
       }
     },
     required: ['site', 'file', 'filename']
   }
 }, {
   name: 'claudeus_wp_media__update',
-  description: 'Update an existing media item',
+  description: 'Update media item metadata',
   inputSchema: {
     type: 'object',
     properties: {
-      site: { type: 'string', description: 'Site alias' },
-      id: {
-        type: 'number',
-        description: 'Media ID',
-        required: true
-      },
+      site: SITE_PARAM,
+      id: ID_PARAM,
       data: {
         type: 'object',
-        description: 'Updated media data',
-        required: true
+        description: 'Updated media metadata'
       }
     },
     required: ['site', 'id', 'data']
@@ -66,18 +58,10 @@ export const mediaTools: Tool[] = [{
   inputSchema: {
     type: 'object',
     properties: {
-      site: { type: 'string', description: 'Site alias' },
-      id: {
-        type: 'number',
-        description: 'Media ID',
-        required: true
-      },
-      force: {
-        type: 'boolean',
-        description: 'Whether to bypass trash and force deletion',
-        required: false
-      }
+      site: SITE_PARAM,
+      id: ID_PARAM,
+      force: FORCE_DELETE_PARAM
     },
     required: ['site', 'id']
   }
-}]; 
+}];

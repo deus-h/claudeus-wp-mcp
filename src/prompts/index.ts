@@ -1,16 +1,16 @@
-interface PromptArgument {
+export interface PromptArgument {
     name: string;
     description: string;
     required: boolean;
 }
 
-interface PromptDefinition {
+export interface PromptDefinition {
     name: string;
     description: string;
     arguments: PromptArgument[];
 }
 
-interface Prompts {
+export interface Prompts {
     [key: string]: PromptDefinition;
 }
 

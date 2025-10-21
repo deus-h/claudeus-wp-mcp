@@ -7,6 +7,19 @@ import { PagesApiClient } from './api/pages.js';
 import { MediaApiClient } from './api/media.js';
 import { BlocksApiClient } from './api/blocks.js';
 import { ThemeApiClient } from './api/themes.js';
+import { TaxonomiesApiClient } from './api/taxonomies.js';
+import { UsersApiClient } from './api/users.js';
+import { CommentsApiClient } from './api/comments.js';
+import { MenusApiClient } from './api/menus.js';
+import { AstraApiClient } from './api/astra.js';
+import { TemplatesApiClient } from './api/templates.js';
+import { GlobalStylesApiClient } from './api/global-styles.js';
+import { PatternsApiClient } from './api/patterns.js';
+import { SettingsApiClient } from './api/settings.js';
+import { PluginsApiClient } from './api/plugins.js';
+import { WidgetsApiClient } from './api/widgets.js';
+import { HealthApiClient } from './api/health.js';
+import { SearchApiClient } from './api/search.js';
 import { ShopAPI } from './api/shop.js';
 import { SecurityManager } from './security/SecurityManager.js';
 import { SecurityConfig } from './types/security.js';
@@ -53,14 +66,27 @@ async function main() {
                 // Create base client for shop API
                 const baseClient = new BaseApiClient(site);
 
-                clients.set(alias, {
-                    posts: new PostsApiClient(site),
-                    pages: new PagesApiClient(site),
-                    media: new MediaApiClient(site),
-                    blocks: new BlocksApiClient(site),
-                    themes: new ThemeApiClient(site),
-                    shop: new ShopAPI(baseClient, security)
-                });
+        clients.set(alias, {
+            posts: new PostsApiClient(site),
+            pages: new PagesApiClient(site),
+            media: new MediaApiClient(site),
+            blocks: new BlocksApiClient(site),
+            themes: new ThemeApiClient(site),
+            taxonomies: new TaxonomiesApiClient(site),
+            users: new UsersApiClient(site),
+            comments: new CommentsApiClient(site),
+            menus: new MenusApiClient(site),
+            astra: new AstraApiClient(site),
+            templates: new TemplatesApiClient(site),
+            globalStyles: new GlobalStylesApiClient(site),
+            patterns: new PatternsApiClient(site),
+            settings: new SettingsApiClient(site),
+            plugins: new PluginsApiClient(site),
+            widgets: new WidgetsApiClient(site),
+            health: new HealthApiClient(site),
+            search: new SearchApiClient(site),
+            shop: new ShopAPI(baseClient, security)
+        });
                 log.info(`Initialized API clients for site: ${alias}`);
             } catch (error) {
                 log.error(`Failed to initialize API clients for site ${alias}:`, error);

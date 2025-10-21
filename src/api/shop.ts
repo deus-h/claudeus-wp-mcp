@@ -1,7 +1,7 @@
 import { BaseApiClient, QueryParams } from './base-client.js';
 import { SecurityManager } from '../security/SecurityManager.js';
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { ErrorResponse } from '../types/index.js';
+import { ErrorResponse, PaginatedResponse, createPaginationMeta } from '../types/index.js';
 
 export interface ProductFilters {
     per_page?: number;
@@ -134,12 +134,20 @@ export class ShopAPI extends BaseApiClient {
         );
     }
 
-    private async wcGet<T>(endpoint: string, params?: QueryParams): Promise<{data: T; headers: Record<string, string>}> {
+    private async wcGet<T>(endpoint: string, params?: QueryParams): Promise<PaginatedResponse<T>> {
         try {
             const response = await this.wcClient.get(endpoint, { params });
+            
+            // Extract pagination metadata from WooCommerce headers
+            const pagination = createPaginationMeta(
+                response.headers as Record<string, string>,
+                params?.page as number || 1,
+                params?.per_page as number || 10
+            );
+            
             return {
                 data: response.data,
-                headers: response.headers as Record<string, string>
+                pagination
             };
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -154,15 +162,15 @@ export class ShopAPI extends BaseApiClient {
         }
     }
 
-    async getProducts(filters?: ProductFilters): Promise<{data: Product[]; headers: Record<string, string>}> {
+    async getProducts(filters?: ProductFilters): Promise<PaginatedResponse<Product[]>> {
         return this.wcGet<Product[]>('/wc/v3/products', filters);
     }
 
-    async getOrders(filters?: OrderFilters): Promise<{data: Order[]; headers: Record<string, string>}> {
+    async getOrders(filters?: OrderFilters): Promise<PaginatedResponse<Order[]>> {
         return this.wcGet<Order[]>('/wc/v3/orders', filters);
     }
 
-    async getSalesStats(filters?: SalesFilters): Promise<{data: SalesStats; headers: Record<string, string>}> {
+    async getSalesStats(filters?: SalesFilters): Promise<PaginatedResponse<SalesStats>> {
         return this.wcGet<SalesStats>('/wc/v3/reports/sales', filters);
     }
 } 

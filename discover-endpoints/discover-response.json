@@ -1,0 +1,2524 @@
+{
+    "name": "The Rift",
+    "description": "The Space Between",
+    "url": "https://therift.se",
+    "home": "https://therift.se",
+    "gmt_offset": "0",
+    "timezone_string": "",
+    "page_for_posts": 1847,
+    "page_on_front": 60,
+    "show_on_front": "page",
+    "namespaces": [
+      "oembed/1.0",
+      "litespeed/v1",
+      "litespeed/v3",
+      "hostinger-tools-plugin/v1",
+      "spectra/v1",
+      "uag/v1",
+      "zipwp/v1",
+      "sureforms/v1",
+      "astra/v1",
+      "astra-addon/v1",
+      "astra_addon/v1",
+      "latepoint",
+      "one-onboarding/v1",
+      "bsf-core/v1",
+      "getting-started/v1",
+      "zipwp-images/v1",
+      "nps-survey/v1",
+      "gutenberg-templates/v1",
+      "wp/v2",
+      "wp-site-health/v1",
+      "wp-block-editor/v1"
+    ],
+    "authentication": {
+      "application-passwords": {
+        "endpoints": {
+          "authorization": "https://therift.se/wp-admin/authorize-application.php"
+        }
+      }
+    },
+    "routes": {
+      "/": {
+        "namespace": "",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/"
+            }
+          ]
+        }
+      },
+      "/batch/v1": {
+        "namespace": "",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "validation": {
+                "type": "string",
+                "enum": [
+                  "require-all-validate",
+                  "normal"
+                ],
+                "default": "normal",
+                "required": false
+              },
+              "requests": {
+                "type": "array",
+                "maxItems": 25,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ],
+                      "default": "POST"
+                    },
+                    "path": {
+                      "type": "string",
+                      "required": true
+                    },
+                    "body": {
+                      "type": "object",
+                      "properties": [],
+                      "additionalProperties": true
+                    },
+                    "headers": {
+                      "type": "object",
+                      "properties": [],
+                      "additionalProperties": {
+                        "type": [
+                          "string",
+                          "array"
+                        ],
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/batch/v1"
+            }
+          ]
+        }
+      },
+      "/oembed/1.0": {
+        "namespace": "oembed/1.0",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "oembed/1.0",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/oembed/1.0"
+            }
+          ]
+        }
+      },
+      "/oembed/1.0/embed": {
+        "namespace": "oembed/1.0",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "url": {
+                "description": "The URL of the resource for which to fetch oEmbed data.",
+                "type": "string",
+                "format": "uri",
+                "required": true
+              },
+              "format": {
+                "default": "json",
+                "required": false
+              },
+              "maxwidth": {
+                "default": 600,
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/oembed/1.0/embed"
+            }
+          ]
+        }
+      },
+      "/oembed/1.0/proxy": {
+        "namespace": "oembed/1.0",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "url": {
+                "description": "The URL of the resource for which to fetch oEmbed data.",
+                "type": "string",
+                "format": "uri",
+                "required": true
+              },
+              "format": {
+                "description": "The oEmbed format to use.",
+                "type": "string",
+                "default": "json",
+                "enum": [
+                  "json",
+                  "xml"
+                ],
+                "required": false
+              },
+              "maxwidth": {
+                "description": "The maximum width of the embed frame in pixels.",
+                "type": "integer",
+                "default": 600,
+                "required": false
+              },
+              "maxheight": {
+                "description": "The maximum height of the embed frame in pixels.",
+                "type": "integer",
+                "required": false
+              },
+              "discover": {
+                "description": "Whether to perform an oEmbed discovery request for unsanctioned providers.",
+                "type": "boolean",
+                "default": true,
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/oembed/1.0/proxy"
+            }
+          ]
+        }
+      },
+      "/uag/v1": {
+        "namespace": "uag/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "uag/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/uag/v1"
+            }
+          ]
+        }
+      },
+      "/uag/v1/admin/commonsettings": {
+        "namespace": "uag/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/uag/v1/admin/commonsettings"
+            }
+          ]
+        }
+      },
+      "/latepoint": {
+        "namespace": "latepoint",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "latepoint",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/latepoint"
+            }
+          ]
+        }
+      },
+      "/latepoint/booking/bite-force": {
+        "namespace": "latepoint",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/latepoint/booking/bite-force"
+            }
+          ]
+        }
+      },
+      "/latepoint/booking/release-force": {
+        "namespace": "latepoint",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/latepoint/booking/release-force"
+            }
+          ]
+        }
+      },
+      "/one-onboarding/v1": {
+        "namespace": "one-onboarding/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "one-onboarding/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/one-onboarding/v1"
+            }
+          ]
+        }
+      },
+      "/one-onboarding/v1/plugin-status/(?P<plugin>[a-zA-Z0-9_-]+)": {
+        "namespace": "one-onboarding/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ]
+      },
+      "/one-onboarding/v1/install-plugin": {
+        "namespace": "one-onboarding/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/one-onboarding/v1/install-plugin"
+            }
+          ]
+        }
+      },
+      "/one-onboarding/v1/activate-plugin": {
+        "namespace": "one-onboarding/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/one-onboarding/v1/activate-plugin"
+            }
+          ]
+        }
+      },
+      "/one-onboarding/v1/save-onboarding-state": {
+        "namespace": "one-onboarding/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/one-onboarding/v1/save-onboarding-state"
+            }
+          ]
+        }
+      },
+      "/one-onboarding/v1/onboarding-completion": {
+        "namespace": "one-onboarding/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/one-onboarding/v1/onboarding-completion"
+            }
+          ]
+        }
+      },
+      "/bsf-core/v1": {
+        "namespace": "bsf-core/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "bsf-core/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/bsf-core/v1"
+            }
+          ]
+        }
+      },
+      "/bsf-core/v1/license/activate": {
+        "namespace": "bsf-core/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "product-id": {
+                "type": "string",
+                "required": true
+              },
+              "license-key": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/bsf-core/v1/license/activate"
+            }
+          ]
+        }
+      },
+      "/getting-started/v1": {
+        "namespace": "getting-started/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "getting-started/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/getting-started/v1"
+            }
+          ]
+        }
+      },
+      "/getting-started/v1/action-items": {
+        "namespace": "getting-started/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/getting-started/v1/action-items"
+            }
+          ]
+        }
+      },
+      "/getting-started/v1/dismiss-setup-wizard": {
+        "namespace": "getting-started/v1",
+        "methods": [
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "dismiss": {
+                "type": "string",
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/getting-started/v1/dismiss-setup-wizard"
+            }
+          ]
+        }
+      },
+      "/getting-started/v1/update-action-item-steps": {
+        "namespace": "getting-started/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "action_id": {
+                "type": "string",
+                "required": true
+              },
+              "steps": {
+                "type": "array",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/getting-started/v1/update-action-item-steps"
+            }
+          ]
+        }
+      },
+      "/zipwp-images/v1": {
+        "namespace": "zipwp-images/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "zipwp-images/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/zipwp-images/v1"
+            }
+          ]
+        }
+      },
+      "/zipwp-images/v1/images": {
+        "namespace": "zipwp-images/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "keywords": {
+                "type": "string",
+                "required": true
+              },
+              "per_page": {
+                "type": "string",
+                "required": false
+              },
+              "page": {
+                "type": "string",
+                "required": false
+              },
+              "orientation": {
+                "type": "string",
+                "required": false
+              },
+              "engine": {
+                "type": "string",
+                "required": false
+              },
+              "filter": {
+                "type": "string",
+                "required": false
+              },
+              "color": {
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/zipwp-images/v1/images"
+            }
+          ]
+        }
+      },
+      "/nps-survey/v1": {
+        "namespace": "nps-survey/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "nps-survey/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/nps-survey/v1"
+            }
+          ]
+        }
+      },
+      "/nps-survey/v1/rating": {
+        "namespace": "nps-survey/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/nps-survey/v1/rating"
+            }
+          ]
+        }
+      },
+      "/nps-survey/v1/dismiss-nps-survey": {
+        "namespace": "nps-survey/v1",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/nps-survey/v1/dismiss-nps-survey"
+            }
+          ]
+        }
+      },
+      "/wp/v2/search": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 10,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "required": false
+              },
+              "type": {
+                "default": "post",
+                "description": "Limit results to items of an object type.",
+                "type": "string",
+                "enum": [
+                  "post",
+                  "term",
+                  "post-format"
+                ],
+                "required": false
+              },
+              "subtype": {
+                "default": "any",
+                "description": "Limit results to items of one or more object subtypes.",
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "post",
+                    "page",
+                    "sureforms_form",
+                    "astra-advanced-hook",
+                    "category",
+                    "post_tag",
+                    "any"
+                  ],
+                  "type": "string"
+                },
+                "required": false
+              },
+              "exclude": {
+                "description": "Ensure result set excludes specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              },
+              "include": {
+                "description": "Limit result set to specific IDs.",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "default": [],
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/search"
+            }
+          ]
+        }
+      },
+      "/wp/v2/block-renderer/(?P<name>[a-z0-9-]+/[a-z0-9-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET",
+              "POST"
+            ],
+            "args": {
+              "name": {
+                "description": "Unique registered name for the block.",
+                "type": "string",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "attributes": {
+                "description": "Attributes for the block.",
+                "type": "object",
+                "default": [],
+                "required": false
+              },
+              "post_id": {
+                "description": "ID of the post context.",
+                "type": "integer",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/block-types": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "namespace": {
+                "description": "Block namespace.",
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/block-types"
+            }
+          ]
+        }
+      },
+      "/wp/v2/block-types/(?P<namespace>[a-zA-Z0-9_-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "namespace": {
+                "description": "Block namespace.",
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/block-types/(?P<namespace>[a-zA-Z0-9_-]+)/(?P<name>[a-zA-Z0-9_-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "name": {
+                "description": "Block name.",
+                "type": "string",
+                "required": false
+              },
+              "namespace": {
+                "description": "Block namespace.",
+                "type": "string",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/settings": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "title": {
+                "title": "Title",
+                "description": "Site title.",
+                "type": "string",
+                "required": false
+              },
+              "description": {
+                "title": "Tagline",
+                "description": "Site tagline.",
+                "type": "string",
+                "required": false
+              },
+              "url": {
+                "title": "",
+                "description": "Site URL.",
+                "type": "string",
+                "format": "uri",
+                "required": false
+              },
+              "email": {
+                "title": "",
+                "description": "This address is used for admin purposes, like new user notification.",
+                "type": "string",
+                "format": "email",
+                "required": false
+              },
+              "timezone": {
+                "title": "",
+                "description": "A city in the same timezone as you.",
+                "type": "string",
+                "required": false
+              },
+              "date_format": {
+                "title": "",
+                "description": "A date format for all date strings.",
+                "type": "string",
+                "required": false
+              },
+              "time_format": {
+                "title": "",
+                "description": "A time format for all time strings.",
+                "type": "string",
+                "required": false
+              },
+              "start_of_week": {
+                "title": "",
+                "description": "A day number of the week that the week should start on.",
+                "type": "integer",
+                "required": false
+              },
+              "language": {
+                "title": "",
+                "description": "WordPress locale code.",
+                "type": "string",
+                "required": false
+              },
+              "use_smilies": {
+                "title": "",
+                "description": "Convert emoticons like :-) and :-P to graphics on display.",
+                "type": "boolean",
+                "required": false
+              },
+              "default_category": {
+                "title": "",
+                "description": "Default post category.",
+                "type": "integer",
+                "required": false
+              },
+              "default_post_format": {
+                "title": "",
+                "description": "Default post format.",
+                "type": "string",
+                "required": false
+              },
+              "posts_per_page": {
+                "title": "Maximum posts per page",
+                "description": "Blog pages show at most.",
+                "type": "integer",
+                "required": false
+              },
+              "show_on_front": {
+                "title": "Show on front",
+                "description": "What to show on the front page",
+                "type": "string",
+                "required": false
+              },
+              "page_on_front": {
+                "title": "Page on front",
+                "description": "The ID of the page that should be displayed on the front page",
+                "type": "integer",
+                "required": false
+              },
+              "page_for_posts": {
+                "title": "",
+                "description": "The ID of the page that should display the latest posts",
+                "type": "integer",
+                "required": false
+              },
+              "default_ping_status": {
+                "title": "",
+                "description": "Allow link notifications from other blogs (pingbacks and trackbacks) on new articles.",
+                "type": "string",
+                "enum": [
+                  "open",
+                  "closed"
+                ],
+                "required": false
+              },
+              "default_comment_status": {
+                "title": "Allow comments on new posts",
+                "description": "Allow people to submit comments on new posts.",
+                "type": "string",
+                "enum": [
+                  "open",
+                  "closed"
+                ],
+                "required": false
+              },
+              "site_logo": {
+                "title": "Logo",
+                "description": "Site logo.",
+                "type": "integer",
+                "required": false
+              },
+              "site_icon": {
+                "title": "Icon",
+                "description": "Site icon.",
+                "type": "integer",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/settings"
+            }
+          ]
+        }
+      },
+      "/wp/v2/themes": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "status": {
+                "description": "Limit result set to themes assigned one or more statuses.",
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "active",
+                    "inactive"
+                  ],
+                  "type": "string"
+                },
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/themes"
+            }
+          ]
+        }
+      },
+      "/wp/v2/themes/(?P<stylesheet>[^\\/:<>\\*\\?\"\\|]+(?:\\/[^\\/:<>\\*\\?\"\\|]+)?)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "stylesheet": {
+                "description": "The theme's stylesheet. This uniquely identifies the theme.",
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/plugins": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "required": false
+              },
+              "status": {
+                "description": "Limits results to plugins with the given status.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "inactive",
+                    "active"
+                  ]
+                },
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "slug": {
+                "type": "string",
+                "description": "WordPress.org plugin directory slug.",
+                "pattern": "[\\w\\-]+",
+                "required": true
+              },
+              "status": {
+                "description": "The plugin activation status.",
+                "type": "string",
+                "enum": [
+                  "inactive",
+                  "active"
+                ],
+                "default": "inactive",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/plugins"
+            }
+          ]
+        }
+      },
+      "/wp/v2/plugins/(?P<plugin>[^.\\/]+(?:\\/[^.\\/]+)?)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "plugin": {
+                "type": "string",
+                "pattern": "[^.\\/]+(?:\\/[^.\\/]+)?",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "plugin": {
+                "type": "string",
+                "pattern": "[^.\\/]+(?:\\/[^.\\/]+)?",
+                "required": false
+              },
+              "status": {
+                "description": "The plugin activation status.",
+                "type": "string",
+                "enum": [
+                  "inactive",
+                  "active"
+                ],
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "plugin": {
+                "type": "string",
+                "pattern": "[^.\\/]+(?:\\/[^.\\/]+)?",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/sidebars": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/sidebars"
+            }
+          ]
+        }
+      },
+      "/wp/v2/sidebars/(?P<id>[\\w-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "id": {
+                "description": "The id of a registered sidebar",
+                "type": "string",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "args": {
+              "widgets": {
+                "description": "Nested widgets.",
+                "type": "array",
+                "items": {
+                  "type": [
+                    "object",
+                    "string"
+                  ]
+                },
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/widget-types": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/widget-types"
+            }
+          ]
+        }
+      },
+      "/wp/v2/widget-types/(?P<id>[a-zA-Z0-9_-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "id": {
+                "description": "The widget type id.",
+                "type": "string",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/widget-types/(?P<id>[a-zA-Z0-9_-]+)/encode": {
+        "namespace": "wp/v2",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "id": {
+                "description": "The widget type id.",
+                "type": "string",
+                "required": true
+              },
+              "instance": {
+                "description": "Current instance settings of the widget.",
+                "type": "object",
+                "required": false
+              },
+              "form_data": {
+                "description": "Serialized widget form data to encode into instance settings.",
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/widget-types/(?P<id>[a-zA-Z0-9_-]+)/render": {
+        "namespace": "wp/v2",
+        "methods": [
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "POST"
+            ],
+            "args": {
+              "id": {
+                "description": "The widget type id.",
+                "type": "string",
+                "required": true
+              },
+              "instance": {
+                "description": "Current instance settings of the widget.",
+                "type": "object",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/widgets": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "sidebar": {
+                "description": "The sidebar to return widgets for.",
+                "type": "string",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the widget.",
+                "type": "string",
+                "required": false
+              },
+              "id_base": {
+                "description": "The type of the widget. Corresponds to ID in widget-types endpoint.",
+                "type": "string",
+                "required": false
+              },
+              "sidebar": {
+                "default": "wp_inactive_widgets",
+                "description": "The sidebar the widget belongs to.",
+                "type": "string",
+                "required": true
+              },
+              "instance": {
+                "description": "Instance settings of the widget, if supported.",
+                "type": "object",
+                "properties": {
+                  "encoded": {
+                    "description": "Base64 encoded representation of the instance settings.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "hash": {
+                    "description": "Cryptographic hash of the instance settings.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "raw": {
+                    "description": "Unencoded instance settings, if supported.",
+                    "type": "object",
+                    "context": [
+                      "edit"
+                    ]
+                  }
+                },
+                "required": false
+              },
+              "form_data": {
+                "description": "URL-encoded form data from the widget admin form. Used to update a widget that does not support instance. Write only.",
+                "type": "string",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/widgets"
+            }
+          ]
+        }
+      },
+      "/wp/v2/widgets/(?P<id>[\\w\\-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "id": {
+                "description": "Unique identifier for the widget.",
+                "type": "string",
+                "required": false
+              },
+              "id_base": {
+                "description": "The type of the widget. Corresponds to ID in widget-types endpoint.",
+                "type": "string",
+                "required": false
+              },
+              "sidebar": {
+                "description": "The sidebar the widget belongs to.",
+                "type": "string",
+                "required": false
+              },
+              "instance": {
+                "description": "Instance settings of the widget, if supported.",
+                "type": "object",
+                "properties": {
+                  "encoded": {
+                    "description": "Base64 encoded representation of the instance settings.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "hash": {
+                    "description": "Cryptographic hash of the instance settings.",
+                    "type": "string",
+                    "context": [
+                      "edit"
+                    ]
+                  },
+                  "raw": {
+                    "description": "Unencoded instance settings, if supported.",
+                    "type": "object",
+                    "context": [
+                      "edit"
+                    ]
+                  }
+                },
+                "required": false
+              },
+              "form_data": {
+                "description": "URL-encoded form data from the widget admin form. Used to update a widget that does not support instance. Write only.",
+                "type": "string",
+                "required": false
+              }
+            }
+          },
+          {
+            "methods": [
+              "DELETE"
+            ],
+            "allow_batch": {
+              "v1": true
+            },
+            "args": {
+              "force": {
+                "description": "Whether to force removal of the widget, or move it to the inactive sidebar.",
+                "type": "boolean",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp/v2/block-directory/search": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 10,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "term": {
+                "description": "Limit result set to blocks matching the search term.",
+                "type": "string",
+                "minLength": 1,
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/block-directory/search"
+            }
+          ]
+        }
+      },
+      "/wp/v2/pattern-directory/patterns": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 100,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              },
+              "search": {
+                "description": "Limit results to those matching a string.",
+                "type": "string",
+                "minLength": 1,
+                "required": false
+              },
+              "category": {
+                "description": "Limit results to those matching a category ID.",
+                "type": "integer",
+                "minimum": 1,
+                "required": false
+              },
+              "keyword": {
+                "description": "Limit results to those matching a keyword ID.",
+                "type": "integer",
+                "minimum": 1,
+                "required": false
+              },
+              "slug": {
+                "description": "Limit results to those matching a pattern (slug).",
+                "type": "array",
+                "required": false
+              },
+              "offset": {
+                "description": "Offset the result set by a specific number of items.",
+                "type": "integer",
+                "required": false
+              },
+              "order": {
+                "description": "Order sort attribute ascending or descending.",
+                "type": "string",
+                "default": "desc",
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "required": false
+              },
+              "orderby": {
+                "description": "Sort collection by post attribute.",
+                "type": "string",
+                "default": "date",
+                "enum": [
+                  "author",
+                  "date",
+                  "id",
+                  "include",
+                  "modified",
+                  "parent",
+                  "relevance",
+                  "slug",
+                  "include_slugs",
+                  "title",
+                  "favorite_count"
+                ],
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/pattern-directory/patterns"
+            }
+          ]
+        }
+      },
+      "/wp/v2/block-patterns/patterns": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/block-patterns/patterns"
+            }
+          ]
+        }
+      },
+      "/wp/v2/block-patterns/categories": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/block-patterns/categories"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "wp-site-health/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/tests/background-updates": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/tests/background-updates"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/tests/loopback-requests": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/tests/loopback-requests"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/tests/https-status": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/tests/https-status"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/tests/dotorg-communication": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/tests/dotorg-communication"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/tests/authorization-header": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/tests/authorization-header"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/directory-sizes": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/directory-sizes"
+            }
+          ]
+        }
+      },
+      "/wp-site-health/v1/tests/page-cache": {
+        "namespace": "wp-site-health/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-site-health/v1/tests/page-cache"
+            }
+          ]
+        }
+      },
+      "/wp-block-editor/v1": {
+        "namespace": "wp-block-editor/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "namespace": {
+                "default": "wp-block-editor/v1",
+                "required": false
+              },
+              "context": {
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-block-editor/v1"
+            }
+          ]
+        }
+      },
+      "/wp-block-editor/v1/url-details": {
+        "namespace": "wp-block-editor/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "url": {
+                "description": "The URL to process.",
+                "type": "string",
+                "format": "uri",
+                "required": true
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-block-editor/v1/url-details"
+            }
+          ]
+        }
+      },
+      "/wp/v2/menu-locations": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/menu-locations"
+            }
+          ]
+        }
+      },
+      "/wp/v2/menu-locations/(?P<location>[\\w-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "location": {
+                "description": "An alphanumeric identifier for the menu location.",
+                "type": "string",
+                "required": false
+              },
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ]
+      },
+      "/wp-block-editor/v1/export": {
+        "namespace": "wp-block-editor/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-block-editor/v1/export"
+            }
+          ]
+        }
+      },
+      "/wp-block-editor/v1/navigation-fallback": {
+        "namespace": "wp-block-editor/v1",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": []
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp-block-editor/v1/navigation-fallback"
+            }
+          ]
+        }
+      },
+      "/wp/v2/font-collections": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              },
+              "page": {
+                "description": "Current page of the collection.",
+                "type": "integer",
+                "default": 1,
+                "minimum": 1,
+                "required": false
+              },
+              "per_page": {
+                "description": "Maximum number of items to be returned in result set.",
+                "type": "integer",
+                "default": 10,
+                "minimum": 1,
+                "maximum": 100,
+                "required": false
+              }
+            }
+          }
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://therift.se/wp-json/wp/v2/font-collections"
+            }
+          ]
+        }
+      },
+      "/wp/v2/font-collections/(?P<slug>[\\/\\w-]+)": {
+        "namespace": "wp/v2",
+        "methods": [
+          "GET"
+        ],
+        "endpoints": [
+          {
+            "methods": [
+              "GET"
+            ],
+            "args": {
+              "context": {
+                "description": "Scope under which the request is made; determines fields present in response.",
+                "type": "string",
+                "enum": [
+                  "view",
+                  "embed",
+                  "edit"
+                ],
+                "default": "view",
+                "required": false
+              }
+            }
+          }
+        ]
+      }
+    },
+    "site_logo": 2165,
+    "site_icon": 2166,
+    "site_icon_url": "https://therift.se/wp-content/uploads/2025/10/cropped-The-Rift-favicon.png",
+    "_links": {
+      "help": [
+        {
+          "href": "https://developer.wordpress.org/rest-api/"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "type": "site_logo",
+          "href": "https://therift.se/wp-json/wp/v2/media/2165"
+        },
+        {
+          "embeddable": true,
+          "type": "site_icon",
+          "href": "https://therift.se/wp-json/wp/v2/media/2166"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    }
+  }

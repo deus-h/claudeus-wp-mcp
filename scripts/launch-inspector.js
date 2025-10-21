@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env node */
 /**
  * 🎸 Claudeus WP MCP - Inspector Launcher
  * 
@@ -35,15 +36,24 @@ console.log('💡 You can change this path in the Inspector UI after it opens\n'
 // Launch Inspector with default environment variable pre-filled
 // The -e flag passes environment variables that appear in the Inspector UI
 const inspectorArgs = [
+  '--yes',  // Auto-accept prompts
   '@modelcontextprotocol/inspector',
   '-e',
   `WP_SITES_PATH=${DEFAULT_WP_SITES_PATH}`,
   WRAPPER_PATH
 ];
 
+// Clean environment - remove npm config that triggers warnings
+const env = { ...process.env };
+delete env.npm_config_verify_deps_before_run;
+delete env.npm_config__jsr_registry;
+delete env.NPM_CONFIG_VERIFY_DEPS_BEFORE_RUN;
+delete env.NPM_CONFIG__JSR_REGISTRY;
+
 const child = spawn('npx', inspectorArgs, {
   stdio: 'inherit',
-  shell: false
+  shell: false,
+  env
 });
 
 child.on('error', (error) => {

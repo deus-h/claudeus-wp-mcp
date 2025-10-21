@@ -1,9 +1,10 @@
 import { BaseApiClient } from './base-client.js';
 import { Theme, ThemeFilters, ThemeCustomization, ThemeCustomizationUpdate } from '../types/theme.js';
+import { PaginatedResponse } from '../types/pagination.js';
 
 export class ThemeApiClient extends BaseApiClient {
-    async getThemes(filters?: ThemeFilters): Promise<Theme[]> {
-        return this.get<Theme[]>('/themes', filters);
+    async getThemes(filters?: ThemeFilters): Promise<PaginatedResponse<Theme[]>> {
+        return this.getPaginated<Theme[]>('/themes', filters);
     }
 
     async getTheme(stylesheet: string): Promise<Theme> {

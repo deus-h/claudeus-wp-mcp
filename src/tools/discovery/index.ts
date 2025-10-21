@@ -1,4 +1,5 @@
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { SITE_PARAM } from '../schemas/common.js';
 
 export const discoveryTools: Tool[] = [{
   name: 'claudeus_wp_discover_endpoints',
@@ -7,11 +8,7 @@ export const discoveryTools: Tool[] = [{
     type: 'object',
     required: [],
     properties: {
-      site: { 
-        type: 'string', 
-        description: 'Site alias (defaults to default_test)',
-        default: 'default_test'
-      }
+      site: SITE_PARAM
     }
   }
-}]; 
+}];

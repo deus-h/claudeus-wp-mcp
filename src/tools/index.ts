@@ -3,13 +3,41 @@ import { contentTools } from './content/index.js';
 import { mediaTools } from './media/index.js';
 import { shopTools } from './shop/index.js';
 import { discoveryTools } from './discovery/index.js';
+import { themeTools } from './theme/index.js';
+import { taxonomyTools } from './taxonomy/index.js';
+import { userTools } from './user/index.js';
+import { commentTools } from './comment/index.js';
+import { menuTools } from './menu/index.js';
+import { astraTools } from './astra/index.js';
+import { templateTools } from './template/index.js';
+import { globalStylesTools } from './global-styles/index.js';
+import { patternTools } from './pattern/index.js';
+import { settingsTools } from './settings/index.js';
+import { pluginTools } from './plugins/index.js';
+import { widgetTools } from './widgets/index.js';
+import { healthTools } from './health/index.js';
+import { searchTools } from './search/index.js';
 
 // Combine all tools
 export const allTools: Tool[] = [
   ...contentTools,
   ...mediaTools,
   ...shopTools,
-  ...discoveryTools
+  ...discoveryTools,
+  ...themeTools,
+  ...taxonomyTools,
+  ...userTools,
+  ...commentTools,
+  ...menuTools,
+  ...astraTools,
+  ...templateTools,
+  ...globalStylesTools,
+  ...patternTools,
+  ...settingsTools,
+  ...pluginTools,
+  ...widgetTools,
+  ...healthTools,
+  ...searchTools
 ];
 
 // Define tool capabilities

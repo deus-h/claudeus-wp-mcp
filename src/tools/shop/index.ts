@@ -1,5 +1,5 @@
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import { DEFAULT_SITE } from '../../config.js';
+import { SITE_PARAM } from '../schemas/common.js';
 
 export const shopTools: Tool[] = [
     {
@@ -9,15 +9,10 @@ export const shopTools: Tool[] = [
             type: 'object',
             required: [],
             properties: {
-                site: { 
-                    type: 'string', 
-                    description: `Site alias (defaults to ${DEFAULT_SITE})`,
-                    default: DEFAULT_SITE
-                },
+                site: SITE_PARAM,
                 filters: {
                     type: 'object',
                     description: 'Optional filters for products query',
-                    required: false,
                     properties: {
                         per_page: { type: 'number' },
                         page: { type: 'number' },
@@ -39,15 +34,10 @@ export const shopTools: Tool[] = [
             type: 'object',
             required: [],
             properties: {
-                site: { 
-                    type: 'string', 
-                    description: 'Site alias (defaults to default_test)',
-                    default: 'default_test'
-                },
+                site: SITE_PARAM,
                 filters: {
                     type: 'object',
                     description: 'Optional filters for orders query',
-                    required: false,
                     properties: {
                         per_page: { type: 'number' },
                         page: { type: 'number' },
@@ -69,15 +59,10 @@ export const shopTools: Tool[] = [
             type: 'object',
             required: [],
             properties: {
-                site: { 
-                    type: 'string', 
-                    description: 'Site alias (defaults to default_test)',
-                    default: 'default_test'
-                },
+                site: SITE_PARAM,
                 filters: {
                     type: 'object',
                     description: 'Optional filters for sales statistics',
-                    required: false,
                     properties: {
                         period: { type: 'string', enum: ['day', 'week', 'month', 'year'] },
                         date_min: { type: 'string', format: 'date-time' },
@@ -89,4 +74,4 @@ export const shopTools: Tool[] = [
             }
         }
     }
-]; 
+];
