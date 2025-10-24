@@ -44,7 +44,7 @@ RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 COPY --chown=mcpuser:mcp --from=builder /build/dist ./dist
 
 # Copy and prepare configuration files
-COPY --chown=mcpuser:mcp wp-sites.json.exmaple /app/config/wp-sites.json.example
+COPY --chown=mcpuser:mcp wp-sites.json.example /app/config/wp-sites.json.example
 COPY --chown=mcpuser:mcp .env.example /app/.env.example
 RUN cp /app/config/wp-sites.json.example /app/config/wp-sites.json && \
     cp /app/.env.example /app/.env

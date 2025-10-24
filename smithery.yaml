@@ -1,13 +1,15 @@
 # Smithery.ai configuration for Claudeus WordPress MCP
 name: "Claudeus WordPress MCP"
-description: "AI-powered WordPress management with MCP protocol support"
-version: "2.0.3"
+description: "The most comprehensive WordPress MCP server - 145 production-ready tools for complete WordPress management with AI"
+version: "3.0.0"
 author:
   name: "Amadeus Samiel H."
-  email: "amadeus.hritani@simhop.se"
+  email: "deus.h@outlook.com"
 organization:
-  name: "SimHop IT & Media AB"
-  website: "https://simhop.se"
+  name: "Deusware"
+  website: "https://deusware.se"
+homepage: "https://deusware.se"
+repository: "https://github.com/deus-h/claudeus-wp-mcp"
 
 startCommand:
   type: stdio
@@ -105,18 +107,67 @@ capabilities:
 security:
   userConsent:
     required: true
-    description: "This MCP server requires access to your WordPress sites and will perform content management operations."
+    description: "This MCP server requires access to your WordPress sites and will perform content management operations including content editing, user management, plugin activation, and site configuration."
   dataAccess:
     - type: "wordpress"
-      description: "Access to configured WordPress sites via REST API"
+      description: "Full access to WordPress sites via REST API - reads and modifies content, users, settings, plugins, themes"
     - type: "filesystem"
-      description: "Access to wp-sites.json configuration file"
+      description: "Access to wp-sites.json configuration file for multi-site management"
   toolSafety:
     confirmationRequired: true
-    description: "Tools can modify WordPress content and settings"
+    description: "Tools can create, modify, and delete WordPress content, users, and settings. Use with caution."
     dangerousOperations:
+      # Content Deletion (High Risk)
       - "delete_post"
       - "delete_page"
       - "delete_block"
       - "delete_media"
+      - "delete_comment"
+      - "delete_user"
+      # System Changes (Critical Risk)
       - "activate_theme"
+      - "activate_plugin"
+      - "deactivate_plugin"
+      - "delete_plugin"
+      - "update_settings"
+      # Astra Pro (Medium Risk)
+      - "delete_custom_layout"
+      - "update_theme_settings"
+      # Menu Management (Medium Risk)
+      - "delete_menu"
+      - "delete_menu_item"
+      # FSE (High Risk)
+      - "delete_template"
+      - "delete_template_part"
+      - "update_global_styles"
+      # Widget Management (Medium Risk)
+      - "delete_widget"
+
+tags:
+  - wordpress
+  - cms
+  - content-management
+  - full-site-editing
+  - astra
+  - woocommerce
+  - site-health
+  - user-management
+  - taxonomy
+  - menus
+
+features:
+  - "145 production-ready tools"
+  - "Content Management (Posts, Pages, Blocks, Media)"
+  - "User Management & Application Passwords"
+  - "Taxonomies (Categories, Tags, Custom Taxonomies)"
+  - "Comments & Moderation"
+  - "Menus & Navigation (Classic + FSE)"
+  - "Full Site Editing (Templates, Global Styles, Patterns)"
+  - "Astra Pro Integration (Mega Menus, Custom Layouts)"
+  - "Site Configuration (Settings, Plugins, Widgets)"
+  - "Site Health & Diagnostics"
+  - "Universal Search & Discovery"
+  - "WooCommerce Support"
+  - "Multi-site Management"
+  - "Pagination Support"
+  - "Enhanced Security"

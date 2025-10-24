@@ -1,196 +1,561 @@
-# 🤘 Claudeus WordPress MCP - Setup Guide
+# 🤘 Claudeus WordPress MCP - Complete Setup Guide
 
-## 🎸 Quick Start (Inspector)
+**Get your 145-tool WordPress powerhouse running in minutes!** 🔥
 
-### 1. Update Your wp-sites.json
-Edit `wp-sites.json` in the project root with your WordPress credentials:
+---
+
+## 📋 Table of Contents
+
+1. [Quick Start (Inspector UI)](#-quick-start-inspector-ui)
+2. [Claude Desktop Setup](#-claude-desktop-setup)
+3. [WordPress Configuration](#-wordpress-configuration)
+4. [Multi-Site Setup](#-multi-site-setup)
+5. [Environment Variables](#-environment-variables)
+6. [Testing & Verification](#-testing--verification)
+7. [Advanced Configuration](#-advanced-configuration)
+8. [Troubleshooting](#-troubleshooting)
+
+---
+
+## 🚀 Quick Start (Inspector UI)
+
+**Best for:** Testing, development, and exploring all 145 tools
+
+### Step 1: Configure WordPress Site
+
+Create `wp-sites.json` in the project root:
 
 ```json
 {
   "default_test": {
-    "URL": "https://your-actual-wordpress-site.com",
-    "USER": "your-wp-username",
-    "PASS": "your-application-password-here",
+    "URL": "https://your-wordpress-site.com",
+    "USER": "admin",
+    "PASS": "your-application-password",
     "authType": "basic"
   }
 }
 ```
 
-**Get WordPress Application Password:**
-1. Go to your WordPress Admin → Users → Profile
-2. Scroll to "Application Passwords"
-3. Enter name: "Claudeus MCP"
-4. Click "Add New"
-5. Copy the generated password (format: `xxxx xxxx xxxx xxxx xxxx xxxx`)
+### Step 2: Get Application Password
 
-### 2. Launch Inspector
+1. Log into WordPress Admin
+2. Navigate to **Users → Profile**
+3. Scroll to **"Application Passwords"** section
+4. Enter name: `"Claude MCP"`
+5. Click **"Add New"**
+6. Copy the generated password
+   - Format: `xxxx xxxx xxxx xxxx xxxx xxxx`
+   - Use as-is with spaces
 
-The Inspector will automatically open with `WP_SITES_PATH` **pre-filled**! 🎸
+### Step 3: Launch Inspector
 
-**Just run:**
 ```bash
+# From project root
 pnpm inspector
+
+# Inspector opens at http://localhost:5173
 ```
 
-**What happens:**
-- Inspector UI opens in your browser
-- `WP_SITES_PATH` is **already filled** with the default path
-- You can change it in the UI if needed
-- Click "Connect" to start!
+**What happens automatically:**
+- ✅ Project builds
+- ✅ Inspector UI launches
+- ✅ `WP_SITES_PATH` pre-filled
+- ✅ Ready to connect!
 
-**To customize the default path permanently:**
-See [INSPECTOR-CUSTOMIZATION.md](./INSPECTOR-CUSTOMIZATION.md) for details.
+### Step 4: Test Connection
 
-**Manual Configuration (if needed):**
-
-If you prefer manual setup in Inspector UI:
-
-**Transport Type:** `STDIO`
-
-**Command:** `dist/inspector-wrapper.js`
-
-**Environment Variables:**
-
-| Variable Name | Value |
-|--------------|-------|
-| `WP_SITES_PATH` | (Your path to wp-sites.json) |
-
-**Note:** The other env vars (HOME, PATH, USER, etc.) are automatically provided by Inspector - you only need `WP_SITES_PATH`!
-
-### 3. Test in Inspector
-
-1. Click **"Connect"** in the Inspector
+1. Click **"Connect"** in Inspector
 2. Go to **"Tools"** tab
-3. You should see all your WordPress tools listed
-4. Try running: `claudeus_wp_discover_endpoints`
-   - Arguments: `{ "site": "default_test" }`
-5. You should get a JSON response with available WordPress REST API endpoints
+3. You should see all 145 tools listed
+4. Try: `claudeus_wp_discover_endpoints`
+   ```json
+   {
+     "site": "default_test"
+   }
+   ```
+5. Success! You'll see available WordPress endpoints
 
 ---
 
-## 🔥 Claude Desktop Configuration
+## 🎸 Claude Desktop Setup
 
-### 1. Locate Claude Desktop Config
+**Best for:** Production use with AI-powered workflows
 
-**macOS:**
+### Prerequisites
+
+- ✅ Node.js ≥ 22.0.0
+- ✅ Claude Desktop installed ([Mac](https://storage.googleapis.com/osprey-downloads-c02f6a0d-347c-492b-a752-3e0651722e97/nest/Claude.dmg) | [Windows](https://storage.googleapis.com/osprey-downloads-c02f6a0d-347c-492b-a752-3e0651722e97/nest-win-x64/Claude-Setup-x64.exe))
+- ✅ WordPress site with REST API enabled
+- ✅ Application password generated
+
+### Option 1: NPM Installation (Recommended)
+
+#### Step 1: Install MCP Server
+
 ```bash
-~/Library/Application Support/Claude/claude_desktop_config.json
+# Install globally
+npm install -g claudeus-wp-mcp
+
+# Or use npx (no installation needed)
+# Configure in claude_desktop_config.json with npx command
 ```
+
+#### Step 2: Create wp-sites.json
+
+Create your sites configuration file:
+
+```bash
+# Create directory for config
+mkdir -p ~/.claudeus-mcp
+
+# Create wp-sites.json
+cat > ~/.claudeus-mcp/wp-sites.json << 'EOF'
+{
+  "default_test": {
+    "URL": "https://your-site.com",
+    "USER": "admin",
+    "PASS": "xxxx xxxx xxxx xxxx xxxx xxxx",
+    "authType": "basic"
+  }
+}
+EOF
+
+# Secure the file
+chmod 600 ~/.claudeus-mcp/wp-sites.json
+```
+
+#### Step 3: Configure Claude Desktop
+
+**Find config file:**
+
+| OS | Location |
+|----|----------|
+| **macOS** | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+| **Windows** | `%APPDATA%\Claude\claude_desktop_config.json` |
 
 **Or open via Claude Desktop:**
 - Claude menu → Settings → Developer → Edit Config
 
-### 2. Add Your MCP Server
-
-**If you already have other MCP servers**, ADD this to your existing `mcpServers` object:
+**Add configuration:**
 
 ```json
 {
   "mcpServers": {
-    "claudeus-wordpress": {
-      "command": "node",
-      "args": ["/Users/deus/opus/mcp/claudeus-wp-mcp/dist/index.js"],
+    "claudeus-wp-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "claudeus-wp-mcp"
+      ],
       "env": {
-        "WP_SITES_PATH": "/Users/deus/opus/mcp/claudeus-wp-mcp/wp-sites.json"
+        "WP_SITES_PATH": "/Users/YOUR_USERNAME/.claudeus-mcp/wp-sites.json"
       }
     }
   }
 }
 ```
 
-**If this is your first MCP server**, use this complete config:
+**⚠️ Important:**
+- Replace `/Users/YOUR_USERNAME/` with your actual home directory
+- Use absolute paths (not `~` or relative paths)
+- On Windows, use forward slashes: `C:/Users/...` or escape backslashes: `C:\\Users\\...`
+
+### Option 2: Local Development Setup
+
+#### Step 1: Clone & Build
+
+```bash
+# Clone repository
+git clone https://github.com/deus-h/claudeus-wp-mcp
+cd claudeus-wp-mcp
+
+# Install dependencies
+pnpm install
+
+# Build project
+pnpm build
+```
+
+#### Step 2: Configure wp-sites.json
+
+```bash
+# Copy example
+cp wp-sites.json.example wp-sites.json
+
+# Edit with your credentials
+nano wp-sites.json
+
+# Secure the file
+chmod 600 wp-sites.json
+```
+
+#### Step 3: Configure Claude Desktop
 
 ```json
 {
   "mcpServers": {
     "claudeus-wordpress": {
       "command": "node",
-      "args": ["/Users/deus/opus/mcp/claudeus-wp-mcp/dist/index.js"],
+      "args": [
+        "/absolute/path/to/claudeus-wp-mcp/dist/index.js"
+      ],
       "env": {
-        "WP_SITES_PATH": "/Users/deus/opus/mcp/claudeus-wp-mcp/wp-sites.json"
+        "WP_SITES_PATH": "/absolute/path/to/claudeus-wp-mcp/wp-sites.json"
       }
     }
   }
 }
 ```
 
-### 3. Restart Claude Desktop
+### Step 4: Restart & Test
 
-**Completely quit and restart Claude Desktop** (not just reload).
+1. **Completely quit Claude Desktop**
+   - macOS: `Cmd + Q`
+   - Windows: Right-click taskbar → Quit
 
-### 4. Test in Claude Desktop
+2. **Restart Claude Desktop**
 
-1. Look for the 🔨 hammer icon in the bottom-right of the chat input
-2. Click it to see available tools
-3. You should see your WordPress tools listed
-4. Try asking Claude: "Can you list the WordPress tools available?"
+3. **Look for hammer icon (🔨)** in chat input
+
+4. **Test with Claude:**
+   ```
+   "Can you show me what WordPress tools are available?"
+   ```
+
+5. **Success indicators:**
+   - Hammer icon appears
+   - Claude lists tools
+   - Can execute WordPress operations
 
 ---
 
-## 🎯 Multi-Site Configuration
+## 🌐 WordPress Configuration
 
-To manage multiple WordPress sites, add more entries to `wp-sites.json`:
+### Enable REST API
+
+WordPress REST API is enabled by default since version 4.7. Verify it's working:
+
+```bash
+# Test REST API (replace with your URL)
+curl https://your-site.com/wp-json/
+
+# Should return JSON with routes
+```
+
+### Application Passwords
+
+**Requirements:**
+- WordPress 5.6+
+- HTTPS enabled (required for application passwords)
+- User with appropriate capabilities
+
+**Creating Application Password:**
+
+1. **Log into WordPress Admin**
+2. **Users → Profile**
+3. **Scroll to "Application Passwords"**
+4. **Enter name:** `Claude MCP` (or any identifier)
+5. **Click "Add New"**
+6. **Copy password:** Includes spaces - use as-is!
+
+**Security Best Practices:**
+- ✅ One password per application
+- ✅ Use descriptive names
+- ✅ Revoke when not needed
+- ✅ Never commit to version control
+- ✅ Use different passwords per environment
+
+### Verify Permissions
+
+Ensure your WordPress user has required capabilities:
+
+| Operation | Required Capability |
+|-----------|-------------------|
+| Manage Posts | `edit_posts`, `publish_posts`, `delete_posts` |
+| Manage Pages | `edit_pages`, `publish_pages`, `delete_pages` |
+| Manage Media | `upload_files`, `delete_files` |
+| Manage Users | `edit_users`, `create_users`, `delete_users` |
+| Manage Plugins | `install_plugins`, `activate_plugins`, `delete_plugins` |
+| Manage Themes | `switch_themes`, `edit_themes` |
+| Site Settings | `manage_options` |
+
+**Administrator role has all capabilities** - recommended for full access.
+
+---
+
+## 🎯 Multi-Site Setup
+
+Manage multiple WordPress sites with a single configuration:
+
+### Basic Multi-Site Configuration
 
 ```json
 {
-  "default_test": {
-    "URL": "https://test-site.com",
+  "production": {
+    "URL": "https://live-site.com",
+    "USER": "admin",
+    "PASS": "prod-password-here",
+    "authType": "basic"
+  },
+  "staging": {
+    "URL": "https://staging-site.com",
+    "USER": "admin",
+    "PASS": "stage-password-here",
+    "authType": "basic"
+  },
+  "development": {
+    "URL": "https://dev-site.local",
+    "USER": "admin",
+    "PASS": "dev-password-here",
+    "authType": "basic"
+  }
+}
+```
+
+### Multi-Client Configuration
+
+```json
+{
+  "client1_prod": {
+    "URL": "https://client1-live.com",
     "USER": "admin",
     "PASS": "xxxx xxxx xxxx xxxx",
     "authType": "basic"
   },
-  "production": {
-    "URL": "https://live-site.com",
+  "client1_stage": {
+    "URL": "https://client1-staging.com",
     "USER": "admin",
     "PASS": "yyyy yyyy yyyy yyyy",
-    "authType": "basic",
-    "capabilities": {
-      "posts": {
-        "claudeus_wp_content__delete_post": false
-      },
-      "pages": {
-        "claudeus_wp_content__delete_page": false
-      },
-      "media": {
-        "claudeus_wp_media__delete": false
-      }
-    }
+    "authType": "basic"
   },
-  "client_site": {
-    "URL": "https://client-site.com",
-    "USER": "deus",
+  "client2_prod": {
+    "URL": "https://client2-live.com",
+    "USER": "admin",
     "PASS": "zzzz zzzz zzzz zzzz",
     "authType": "basic"
   }
 }
 ```
 
-### Capabilities Control (Optional)
+### Using Multiple Sites
 
-By default, **all tools are enabled**. To restrict tools for specific sites, add a `capabilities` object:
-
-**Example: Safe Production Site (no deletes)**
+**In Inspector UI:**
 ```json
-"production": {
-  "URL": "https://live-site.com",
-  "USER": "admin",
-  "PASS": "xxxx xxxx xxxx xxxx",
-  "authType": "basic",
-  "capabilities": {
-    "posts": {
-      "claudeus_wp_content__delete_post": false
-    },
-    "pages": {
-      "claudeus_wp_content__delete_page": false
-    },
-    "blocks": {
-      "claudeus_wp_content__delete_block": false
-    },
-    "media": {
-      "claudeus_wp_media__delete": false
-    },
-    "themes": {
-      "claudeus_wp_theme__activate": false
+{
+  "site": "production"  // or "staging", "client1_prod", etc.
+}
+```
+
+**With Claude:**
+```
+"Create a blog post on the staging site about..."
+"List all posts from client1_prod"
+"Check health status for production"
+```
+
+---
+
+## 🔧 Environment Variables
+
+### Required Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `WP_SITES_PATH` | Path to wp-sites.json | `/path/to/wp-sites.json` |
+
+### Optional Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `NODE_ENV` | Environment mode | `production` |
+| `LOG_LEVEL` | Logging verbosity | `info` |
+| `DEBUG` | Enable debug mode | `false` |
+
+### Setting Environment Variables
+
+**macOS/Linux:**
+```bash
+# Temporary (current session)
+export WP_SITES_PATH="/path/to/wp-sites.json"
+
+# Permanent (add to ~/.zshrc or ~/.bashrc)
+echo 'export WP_SITES_PATH="/path/to/wp-sites.json"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**Windows (PowerShell):**
+```powershell
+# Temporary (current session)
+$env:WP_SITES_PATH = "C:\path\to\wp-sites.json"
+
+# Permanent (System Environment Variables)
+[System.Environment]::SetEnvironmentVariable("WP_SITES_PATH", "C:\path\to\wp-sites.json", "User")
+```
+
+---
+
+## ✅ Testing & Verification
+
+### Test Checklist
+
+#### 1. Connection Test
+```bash
+# Test with Inspector
+pnpm inspector
+
+# Or test REST API directly
+curl https://your-site.com/wp-json/wp/v2/
+```
+
+#### 2. Authentication Test
+**In Inspector, run:**
+```json
+Tool: claudeus_wp_health__test_auth
+Arguments: { "site": "default_test" }
+```
+
+**Expected response:**
+```json
+{
+  "status": "good",
+  "label": "Authorization header test",
+  "description": "The REST API can use the Authorization header..."
+}
+```
+
+#### 3. Tools Discovery Test
+**Run:**
+```json
+Tool: claudeus_wp_discover_endpoints
+Arguments: { "site": "default_test" }
+```
+
+**Expected:** JSON with all available WordPress endpoints
+
+#### 4. Content Read Test
+**Run:**
+```json
+Tool: claudeus_wp_content__get_posts
+Arguments: {
+  "site": "default_test",
+  "filters": {
+    "per_page": 5
+  }
+}
+```
+
+**Expected:** List of posts with pagination metadata
+
+#### 5. Health Check Test
+**Run:**
+```json
+Tool: claudeus_wp_health__run_all_tests
+Arguments: { "site": "default_test" }
+```
+
+**Expected:** Comprehensive health report
+
+### Verification Script
+
+Create `test-connection.sh`:
+
+```bash
+#!/bin/bash
+
+echo "🧪 Testing Claudeus WordPress MCP..."
+
+# Test 1: REST API Availability
+echo "1️⃣ Testing REST API..."
+curl -s https://your-site.com/wp-json/ > /dev/null && echo "✅ REST API accessible" || echo "❌ REST API unreachable"
+
+# Test 2: Inspector Launch
+echo "2️⃣ Testing Inspector..."
+pnpm inspector &
+sleep 5
+curl -s http://localhost:5173 > /dev/null && echo "✅ Inspector running" || echo "❌ Inspector failed"
+
+# Test 3: Build Status
+echo "3️⃣ Testing Build..."
+[ -f "dist/index.js" ] && echo "✅ Build complete" || echo "❌ Build missing"
+
+echo "✅ Tests complete!"
+```
+
+---
+
+## ⚙️ Advanced Configuration
+
+### Site-Specific Capabilities
+
+Restrict dangerous operations per site:
+
+```json
+{
+  "production": {
+    "URL": "https://live-site.com",
+    "USER": "admin",
+    "PASS": "xxxx xxxx xxxx xxxx",
+    "authType": "basic",
+    "capabilities": {
+      "content": {
+        "claudeus_wp_content__delete_post": false,
+        "claudeus_wp_content__delete_page": false,
+        "claudeus_wp_content__delete_block": false
+      },
+      "media": {
+        "claudeus_wp_media__delete": false
+      },
+      "users": {
+        "claudeus_wp_users__delete_user": false
+      },
+      "plugins": {
+        "claudeus_wp_plugins__delete": false
+      },
+      "themes": {
+        "claudeus_wp_theme__activate": false
+      }
+    }
+  }
+}
+```
+
+**Effect:** Production site becomes read/write only - no destructive operations.
+
+### JWT Authentication
+
+For sites using JWT authentication:
+
+```json
+{
+  "jwt_site": {
+    "URL": "https://jwt-site.com",
+    "USER": "admin",
+    "PASS": "your-jwt-token",
+    "authType": "jwt"
+  }
+}
+```
+
+**JWT Token Setup:**
+1. Install [JWT Authentication plugin](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
+2. Configure plugin
+3. Generate token
+4. Use token as `PASS` value
+
+### Custom Headers
+
+Add custom headers for specific sites:
+
+```json
+{
+  "custom_site": {
+    "URL": "https://custom-site.com",
+    "USER": "admin",
+    "PASS": "xxxx xxxx xxxx xxxx",
+    "authType": "basic",
+    "headers": {
+      "X-Custom-Header": "custom-value",
+      "X-API-Version": "v2"
     }
   }
 }
@@ -198,161 +563,222 @@ By default, **all tools are enabled**. To restrict tools for specific sites, add
 
 ---
 
-## 🛠️ Development Workflow
-
-### Run Inspector for Testing
-```bash
-cd /Users/deus/opus/mcp/claudeus-wp-mcp
-pnpm inspector
-```
-
-This will:
-1. Build the project
-2. Launch the MCP Inspector UI
-3. Open browser at http://localhost:5173
-
-### Watch Mode (Auto-rebuild)
-```bash
-pnpm watch
-```
-
-### Run Server Directly (stdio)
-```bash
-WP_SITES_PATH=/Users/deus/opus/mcp/claudeus-wp-mcp/wp-sites.json node dist/index.js
-```
-
----
-
 ## 🔍 Troubleshooting
 
-### Inspector Won't Connect
+### Common Issues & Solutions
 
-**Problem:** "Failed to connect to MCP server"
+#### Issue 1: "Connection Failed"
 
-**Solutions:**
-1. Check that `WP_SITES_PATH` environment variable is set in Inspector
-2. Verify `wp-sites.json` exists and has valid JSON
-3. Check that WordPress URL is accessible
-4. Verify WordPress Application Password is correct
-5. Look at the Inspector's console output (bottom panel)
-
-### Claude Desktop Not Showing Tools
-
-**Problem:** Hammer icon not appearing or no tools listed
+**Symptoms:**
+- Inspector won't connect
+- Claude Desktop shows no tools
 
 **Solutions:**
-1. Verify config file path is correct
-2. Make sure you used absolute paths (not relative)
-3. Completely quit and restart Claude Desktop
-4. Check Claude's logs:
-   - macOS: `~/Library/Logs/Claude/mcp*.log`
-5. Verify `dist/index.js` exists and is executable:
+1. **Verify wp-sites.json path is absolute**
    ```bash
-   ls -la /Users/deus/opus/mcp/claudeus-wp-mcp/dist/index.js
+   # Check file exists
+   ls -la /absolute/path/to/wp-sites.json
    ```
 
-### WordPress Connection Errors
-
-**Problem:** "Failed to connect to WordPress site"
-
-**Solutions:**
-1. Test WordPress REST API directly:
+2. **Test WordPress REST API**
    ```bash
    curl https://your-site.com/wp-json/
    ```
-2. Verify Application Password is correct (no extra spaces)
-3. Check that WordPress REST API is enabled
-4. Verify user has sufficient permissions
-5. Check for WordPress security plugins blocking REST API
 
-### Build Errors
+3. **Verify Application Password**
+   - Check for typos
+   - Ensure spaces are included
+   - Try generating new password
 
-**Problem:** TypeScript compilation fails
+4. **Check HTTPS**
+   - Application Passwords require HTTPS
+   - Test: Visit site with https://
+
+#### Issue 2: "Authorization Failed"
+
+**Symptoms:**
+- `401 Unauthorized` errors
+- "Authorization header test failed"
 
 **Solutions:**
+1. **Regenerate Application Password**
+   - WordPress Admin → Users → Profile
+   - Delete old password
+   - Create new one
+
+2. **Check User Capabilities**
+   - Ensure user has required permissions
+   - Try with Administrator role
+
+3. **Verify REST API Authentication**
+   ```bash
+   curl -u admin:xxxx-xxxx-xxxx-xxxx \
+     https://your-site.com/wp-json/wp/v2/users/me
+   ```
+
+#### Issue 3: "Tools Not Showing in Claude Desktop"
+
+**Symptoms:**
+- No hammer icon
+- Tools list empty
+
+**Solutions:**
+1. **Verify Config Syntax**
+   ```bash
+   # Validate JSON
+   cat ~/Library/Application\ Support/Claude/claude_desktop_config.json | python -m json.tool
+   ```
+
+2. **Check Paths Are Absolute**
+   ```json
+   // ❌ Wrong
+   "WP_SITES_PATH": "~/wp-sites.json"
+   
+   // ✅ Correct
+   "WP_SITES_PATH": "/Users/yourname/wp-sites.json"
+   ```
+
+3. **Completely Restart Claude**
+   - Not just reload - full quit and restart
+   - macOS: `Cmd + Q` then relaunch
+
+4. **Check Claude Logs**
+   ```bash
+   # macOS
+   tail -f ~/Library/Logs/Claude/mcp*.log
+   
+   # Look for errors or connection issues
+   ```
+
+#### Issue 4: "Some Tools Fail, Others Work"
+
+**Symptoms:**
+- Some tools return errors
+- Others work fine
+
+**Solutions:**
+1. **Check Tool-Specific Requirements**
+   - FSE tools require WordPress 5.9+
+   - Astra tools require Astra theme installed
+   - WooCommerce tools require WooCommerce plugin
+
+2. **Verify Plugin/Theme Active**
+   ```json
+   Tool: claudeus_wp_plugins__list
+   Tool: claudeus_wp_theme__list
+   ```
+
+3. **Check User Capabilities**
+   - Different tools require different permissions
+   - Administrator role recommended
+
+#### Issue 5: "Performance Issues / Timeouts"
+
+**Symptoms:**
+- Slow responses
+- Timeout errors
+- Bulk operations fail
+
+**Solutions:**
+1. **Use Pagination**
+   ```json
+   {
+     "filters": {
+       "per_page": 10,  // Smaller batches
+       "page": 1
+     }
+   }
+   ```
+
+2. **Check WordPress Performance**
+   ```json
+   Tool: claudeus_wp_health__run_all_tests
+   ```
+
+3. **Verify Server Resources**
+   - Check WordPress hosting limits
+   - Monitor PHP memory limit
+   - Check WordPress debug log
+
+### Debug Mode
+
+Enable debug logging:
+
 ```bash
-# Clean build
-pnpm clean
-pnpm install
-pnpm build
+# Set environment variable
+export DEBUG=claudeus:*
 
-# If that doesn't work, check Node version
-node --version  # Should be >= 16
-
-# Reinstall dependencies
-rm -rf node_modules pnpm-lock.yaml
-pnpm install
-pnpm build
+# Run with debug enabled
+WP_SITES_PATH=/path/to/wp-sites.json \
+DEBUG=claudeus:* \
+node dist/index.js
 ```
 
----
+### Getting Help
 
-## 📊 Available Tools
+**Before Reporting Issues:**
+1. ✅ Check this guide
+2. ✅ Review [SECURITY.md](SECURITY.md)
+3. ✅ Test with Inspector UI
+4. ✅ Check Claude Desktop logs
+5. ✅ Verify WordPress REST API works
 
-### Discovery
-- `claudeus_wp_discover_endpoints` - List all WordPress REST API endpoints
-
-### Posts
-- `claudeus_wp_content__get_posts` - List posts with filters
-- `claudeus_wp_content__create_post` - Create new post
-- `claudeus_wp_content__update_post` - Update existing post
-- `claudeus_wp_content__delete_post` - Delete post ⚠️
-
-### Pages
-- `claudeus_wp_content__get_pages` - List pages
-- `claudeus_wp_content__create_page` - Create new page
-- `claudeus_wp_content__update_page` - Update existing page
-- `claudeus_wp_content__delete_page` - Delete page ⚠️
-
-### Media
-- `claudeus_wp_media__get_media` - List media files
-- `claudeus_wp_media__upload` - Upload new media
-- `claudeus_wp_media__update` - Update media metadata
-- `claudeus_wp_media__delete` - Delete media ⚠️
-
-### Blocks
-- `claudeus_wp_content__get_blocks` - List reusable blocks
-- `claudeus_wp_content__create_block` - Create new block
-- `claudeus_wp_content__update_block` - Update existing block
-- `claudeus_wp_content__delete_block` - Delete block ⚠️
-- `claudeus_wp_content__get_block_revisions` - Get block revisions
-
-### Themes
-- `claudeus_wp_theme__list` - List installed themes
-- `claudeus_wp_theme__get_active` - Get active theme
-- `claudeus_wp_theme__activate` - Activate theme ⚠️
-- `claudeus_wp_theme__get_customization` - Get theme settings
-- `claudeus_wp_theme__update_customization` - Update theme settings
-- `claudeus_wp_theme__get_custom_css` - Get custom CSS
-- `claudeus_wp_theme__update_custom_css` - Update custom CSS
-
-### WooCommerce
-- `claudeus_wp_shop__get_products` - List products
-- `claudeus_wp_shop__get_orders` - List orders
-- `claudeus_wp_shop__get_sales` - Get sales statistics
-
-**⚠️ = Dangerous operation** - Can be disabled via capabilities
+**Team Members:**
+- 📧 Email: amadeus.hritani@simhop.se
+- 🔧 Internal: Slack #claudeus-mcp channel
 
 ---
 
-## 🎸 Pro Tips
+## 📚 Quick Reference
 
-1. **Use Test Site First** - Always test on a staging/test WordPress site before production
-2. **Disable Dangerous Tools** - Use capabilities to disable delete/activate tools on production
-3. **Multiple Sites** - Set up different site aliases for different environments
-4. **Git Ignore** - `wp-sites.json` is already in `.gitignore` to protect credentials
-5. **Application Passwords** - Use WordPress Application Passwords, not your main password
-6. **Monitor Usage** - Check WordPress logs for API activity
+### Essential Commands
+
+```bash
+# Install
+npm install -g claudeus-wp-mcp
+
+# Launch Inspector
+pnpm inspector
+
+# Build project
+pnpm build
+
+# Run tests
+pnpm test
+
+# Watch mode
+pnpm watch
+```
+
+### Essential Paths
+
+| OS | Config Location |
+|----|----------------|
+| macOS | `~/Library/Application Support/Claude/` |
+| Windows | `%APPDATA%\Claude\` |
+
+### Essential Files
+
+| File | Purpose |
+|------|---------|
+| `wp-sites.json` | Site configuration |
+| `claude_desktop_config.json` | Claude Desktop config |
+| `dist/index.js` | Built MCP server |
 
 ---
 
-## 🔥 Next Steps
+## 🎯 Next Steps
 
-1. ✅ Update `wp-sites.json` with real credentials
-2. ✅ Test in Inspector first
-3. ✅ Configure Claude Desktop
-4. ✅ Test basic operations
-5. 🎸 Rock and roll!
+After successful setup:
 
-Need help? Check the logs or reach out! 🤘❤️
+1. **📖 Explore Tools** - Try all 145 tools in Inspector
+2. **🔒 Review Security** - Read [SECURITY.md](SECURITY.md)
+3. **🎸 Start Creating** - Use with Claude for AI-powered workflows
+4. **📊 Monitor Health** - Run regular health checks
+5. **🚀 Automate** - Build custom workflows
 
+---
+
+> 🤘 **Setup complete! You now have 145 WordPress tools at your command!**
+
+Made with 🤘🔥 by SimHop IT & Media AB
