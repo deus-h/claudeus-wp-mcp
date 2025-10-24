@@ -1,15 +1,43 @@
 {
   "name": "claudeus-wp-mcp",
-  "version": "2.0.5",
-  "description": "Model Context Protocol server for WordPress integration",
+  "version": "3.0.0",
+  "description": "The most comprehensive WordPress MCP server - 145 production-ready tools for complete WordPress management with AI",
   "license": "MIT",
   "private": false,
-  "author": "Amadeus Samiel H.",
-  "homepage": "https://simhop.se",
-  "bugs": "https://github.com/deus-h/claudeus-wp-mcp/discussions",
+  "author": "Amadeus Samiel H. <deus.h@outlook.com>",
+  "homepage": "https://deusware.se",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deus-h/claudeus-wp-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deus-h/claudeus-wp-mcp/issues"
+  },
+  "keywords": [
+    "wordpress",
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "claude-desktop",
+    "ai",
+    "wordpress-api",
+    "rest-api",
+    "cms",
+    "headless-wordpress",
+    "wordpress-management",
+    "content-management",
+    "astra",
+    "astra-pro",
+    "woocommerce",
+    "full-site-editing",
+    "fse",
+    "wordpress-automation",
+    "site-health",
+    "wordpress-tools"
+  ],
   "type": "module",
   "engines": {
-    "node": ">=16"
+    "node": ">=22.0.0"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -35,3 +35,8 @@ coverage/
 
 # Local configuration files
 sites-config.json
+
+# Package tarballs
+*.tgz
+
+local-planning/

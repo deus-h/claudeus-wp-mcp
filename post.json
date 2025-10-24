@@ -1,8 +1,0 @@
-{
-    "title": "My Test Post",
-    "content": "<p>This is a test post content.</p>",
-    "status": "draft",
-    "excerpt": "A brief excerpt of the post",
-    "categories": [1, 2],
-    "tags": [3, 4]
-}

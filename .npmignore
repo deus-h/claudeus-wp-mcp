@@ -1,3 +1,77 @@
+# Dependencies
 node_modules/
 package-lock.json
 *.tgz
+
+# Source files (compiled to dist/)
+src/
+
+# Development files
+.github/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+**/*.test.ts
+**/*.spec.ts
+__tests__/
+coverage/
+jest.config.js
+
+# Build artifacts
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# TypeScript config (not needed for distribution)
+tsconfig.json
+
+# Linting config
+.eslintrc.json
+eslint.config.js
+.prettierrc
+
+# Discovery data (internal development data)
+discover-endpoints/
+
+# Planning docs (internal)
+local-planning/
+
+# Environment files
+.env
+.env.*
+
+# WordPress config (user creates their own)
+wp-sites.json
+
+# Example files (keep these)
+!.env.example
+!claude_desktop_config.json.example
+!wp-sites.json.exmaple
+
+# Scripts (development only)
+scripts/
+
+# Inspector config (development only)
+mcp-inspector-config.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentation (keep main ones, exclude planning)
+REFACTORING-PLAN.md
+IMPLEMENTATION-KNOWLEDGE-ASSESSMENT.md
+TOOLS-*.md
+SCHEMA-REFACTOR-PROPOSAL.md
+PAGINATION-ENHANCEMENT-COMPLETE.md
+TIER-*.md
+ASTRA-*.md
+TAXONOMY-TOOLS-COMPLETE.md
+USERS-TOOLS-COMPLETE.md
