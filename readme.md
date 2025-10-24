@@ -495,7 +495,7 @@ pnpm test:coverage
 
 ## 🤝 Contributing
 
-⚠️ **Private Repository** - This is maintained by SimHop IT & Media AB development team. Contributions are limited to approved team members.
+⚠️ **Private Repository** - This is maintained by Deusware AB development team. Contributions are limited to approved team members.
 
 **For approved team members:**
 1. Create feature branch
@@ -504,13 +504,13 @@ pnpm test:coverage
 4. Submit PR for review
 
 **Want to join the team?**
-Contact: amadeus.hritani@simhop.se
+Contact: deus.h@outlook.com
 
 ---
 
 ## 🎸 The Team
 
-### SimHop IT & Media AB
+### Deusware AB
 
 **Amadeus Samiel H. (CTO/Lead Architect)**
 - MSc in Computer Science
@@ -521,7 +521,7 @@ Contact: amadeus.hritani@simhop.se
 **Simon Malki (CEO)**
 - 20+ years of business leadership
 - Strategic planning expert
-- Driving SimHop's vision
+- Driving Deusware's vision
 
 **Locations:**
 - 📍 **Stockholm HQ**: Krögers Promenad 11, 191 37 Sollentuna
@@ -570,6 +570,6 @@ MIT License - Rock on!
 
 ---
 
-> Made with 🤘❤️ by [<span style="color: #A351D6">Amadeus Samiel H.</span>](mailto:amadeus.hritani@simhop.se)
+> Made with 🤘❤️ by [<span style="color: #A351D6">Amadeus Samiel H.</span>](mailto:deus.h@outlook.com)
 
 **145 Tools. Zero Compromise. Pure Metal.** 🎸🔥

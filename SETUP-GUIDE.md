@@ -724,7 +724,7 @@ node dist/index.js
 5. ✅ Verify WordPress REST API works
 
 **Team Members:**
-- 📧 Email: amadeus.hritani@simhop.se
+- 📧 Email: deus.h@outlook.com
 - 🔧 Internal: Slack #claudeus-mcp channel
 
 ---
@@ -781,4 +781,4 @@ After successful setup:
 
 > 🤘 **Setup complete! You now have 145 WordPress tools at your command!**
 
-Made with 🤘🔥 by SimHop IT & Media AB
+Made with 🤘🔥 by Deusware AB

@@ -418,7 +418,7 @@ tail -f wp-content/debug.log
 
 ### ⚠️ PRIVATE REPOSITORY - INTERNAL USE ONLY
 
-This repository is for SimHop IT & Media AB team use only.
+This repository is for Deusware AB team use only.
 
 ### For Team Members
 
@@ -430,9 +430,9 @@ This repository is for SimHop IT & Media AB team use only.
 4. **DO** contact security team immediately
 
 **Contact:**
-- 📧 **Email**: security@simhop.se
+- 📧 **Email**: security@deusware.se
 - 📱 **Emergency**: +46-76-427-1243 (Amadeus)
-- 🔒 **Encrypted**: Use PGP key from security@simhop.se
+- 🔒 **Encrypted**: Use PGP key from security@deusware.se
 
 ### Security Issue Template
 
@@ -467,7 +467,7 @@ This repository is for SimHop IT & Media AB team use only.
 
 ### Update Policy
 
-**Security updates are handled internally by SimHop IT & Media AB.**
+**Security updates are handled internally by Deusware AB.**
 
 **Update Priority:**
 
@@ -548,7 +548,7 @@ Before going to production:
 | Backup database | `wp db export backup.sql` |
 | View logs | `tail -f wp-content/debug.log` |
 | Update MCP | `npm update -g claudeus-wp-mcp` |
-| Report vulnerability | security@simhop.se |
+| Report vulnerability | security@deusware.se |
 
 ---
 
@@ -569,4 +569,4 @@ While Claudeus WordPress MCP implements comprehensive security measures, **you a
 
 > 🔒 **Security is not a feature, it's a foundation.** Every one of our 145 tools is built with security first.
 
-Made with 🤘🔒 by SimHop IT & Media AB
+Made with 🤘🔒 by Deusware AB

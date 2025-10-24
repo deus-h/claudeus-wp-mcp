@@ -201,7 +201,7 @@ If upgrading from version 2.x:
 
 This massive update was crafted with precision and passion by:
 - **Amadeus Samiel H.** (CTO/Lead Architect) - Complete architecture and implementation
-- **SimHop IT & Media AB** - Development team
+- **Deusware AB** - Development team
 
 ### Acknowledgments
 
