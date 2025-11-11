@@ -7,7 +7,7 @@
 [![NPM Version](https://img.shields.io/npm/v/claudeus-wp-mcp.svg)](https://www.npmjs.com/package/claudeus-wp-mcp)
 [![MCP Standard](https://img.shields.io/badge/MCP-2024--11--05-purple.svg)](https://github.com/deus-h/claudeus-wp-mcp)
 
-![Claudeus WordPress MCP Server](https://raw.githubusercontent.com/deus-h/claudeus-wp-mcp/refs/heads/master/assets/claudeus-wp-mcp-open-graph.png)
+![Claudeus WordPress MCP Server](https://raw.githubusercontent.com/deus-h/claudeus-wp-mcp/refs/heads/master/assets/claudeus-wp-mcp-open-graph-2.png)
 
 ## 🔥 The Complete WordPress AI Powerhouse
 
