@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.0.1] - 2025-11-11
+
+### Changed
+- Refined build scripts to use Node-based file removal and conditional permission updates, ensuring consistent builds across platforms.
+- Refreshed Open Graph preview image for sharper social sharing cards.
+
+---
+
 ## [3.0.0] - 2025-01-21
 
 ### 🎉 Major Release - Complete Architecture Rewrite
