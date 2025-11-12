@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/deus-h-claudeus-wp-mcp-badge.png)](https://mseep.ai/app/deus-h-claudeus-wp-mcp)
+
 # <span style="color: #A351D6">🤘 Claudeus WordPress MCP</span> 🎸
 > *"The Most Comprehensive WordPress MCP Server - 145 Tools, Zero Compromise!"* <span style="color: #000000">🖤</span>
 
