@@ -13,7 +13,7 @@ import {
     ListPromptsRequestSchema,
     GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
-import { DEFAULT_SITE } from '../config.js';
+import { defaultSite } from '../config/site-config.js';
 import { isToolAllowed } from '../utils/capabilities.js';
 import { allTools } from '../tools/index.js';
 import { routeToolCall, ClientMap } from '../handlers/tools.js';
@@ -85,7 +85,7 @@ export function registerTools(server: Server, clients: Map<string, ClientMap>) {
 
     server.setRequestHandler(ListToolsRequestSchema, async (request) => {
         // Get the site from request params or use default
-        const site = (request.params?.site as string) || DEFAULT_SITE;
+        const site = (request.params?.site as string) || defaultSite;
         const client = clients.get(site);
 
         if (!client) {
@@ -116,7 +116,7 @@ export function registerTools(server: Server, clients: Map<string, ClientMap>) {
         const args = request.params.arguments;
 
         // Set default site if not provided
-        const site = args.site as string || DEFAULT_SITE;
+        const site = args.site as string || defaultSite;
         args.site = site;
 
         // CRITICAL SECURITY CHECK: Check tool permissions BEFORE making any API calls

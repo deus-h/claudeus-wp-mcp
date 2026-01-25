@@ -9,6 +9,8 @@ const log = {
     warn: (...args: unknown[]) => console.error('[WARN]', ...args)
 };
 
+export let defaultSite = 'default_test';
+
 export async function loadSiteConfig(): Promise<SiteConfigurations> {
     const configPath = process.env.WP_SITES_PATH;
     if (!configPath) {
@@ -37,6 +39,9 @@ export async function loadSiteConfig(): Promise<SiteConfigurations> {
                     auth: site.PASS,
                     authType: (site.authType || 'basic') as 'basic' | 'jwt'
                 };
+                if (site.default) {
+                    defaultSite = alias.toLowerCase();
+                }
             } catch (error) {
                 throw new Error(`Invalid site URL: ${site.URL} - ${error instanceof Error ? error.message : 'Unknown error'}`);
             }

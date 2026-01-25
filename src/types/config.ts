@@ -58,6 +58,7 @@ export interface RawSiteConfig {
     PASS: string;
     authType?: string;
     capabilities?: SiteCapabilities;
+    default?: boolean;
 }
 
 export interface SiteConfigurations {

@@ -1,6 +1,6 @@
 import { ShopAPI } from '../../api/shop.js';
 import { ProductFilters, OrderFilters, SalesFilters } from '../../types/index.js';
-import { DEFAULT_SITE } from '../../config.js';
+import { defaultSite } from '../../config/site-config.js';
 
 export async function handleShopTools(name: string, args: Record<string, unknown>, shopAPI: ShopAPI) {
     // Debug logging
@@ -9,7 +9,7 @@ export async function handleShopTools(name: string, args: Record<string, unknown
 
     // Always set the default site
     args = {
-        site: DEFAULT_SITE,
+        site: defaultSite,
         ...args
     };
 

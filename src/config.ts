@@ -5,7 +5,6 @@ import fs from 'fs';
 // Quiet mode to avoid polluting stdout (breaks MCP JSON-RPC protocol)
 config({ quiet: true });
 
-export const DEFAULT_SITE = 'default_test';
 
 export function loadSiteConfigurations(configPath: string): SiteConfigurations {
     const rawConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
