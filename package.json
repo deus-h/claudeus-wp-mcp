@@ -5,6 +5,11 @@
   "license": "MIT",
   "private": false,
   "author": "Amadeus Samiel H. <deus.h@outlook.com>",
+  "contributors": [
+  {
+    "name": "Youssef Atshan",
+    "email": "joe@athanor.se"
+  }],
   "homepage": "https://deusware.se",
   "repository": {
     "type": "git",
