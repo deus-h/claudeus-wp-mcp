@@ -49,6 +49,7 @@ export interface SiteConfig {
     username: string;
     auth: string;
     authType: 'basic' | 'jwt';
+    restRouteFallback?: boolean;
     capabilities?: SiteCapabilities;
 }
 
@@ -57,6 +58,7 @@ export interface RawSiteConfig {
     USER: string;
     PASS: string;
     authType?: string;
+    restRouteFallback?: boolean;
     capabilities?: SiteCapabilities;
 }
 

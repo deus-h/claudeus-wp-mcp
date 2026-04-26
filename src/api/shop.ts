@@ -106,8 +106,9 @@ export class ShopAPI extends BaseApiClient {
     constructor(client: BaseApiClient, security: SecurityManager) {
         super(client.site);
         this.security = security;
+        const wcBaseURL = client.site.restRouteFallback ? client.site.url : `${client.site.url}/wp-json`;
         this.wcClient = axios.create({
-            baseURL: `${client.site.url}/wp-json`,
+            baseURL: wcBaseURL,
             auth: client.site.authType === 'basic' ? {
                 username: client.site.username,
                 password: client.site.auth
@@ -118,6 +119,17 @@ export class ShopAPI extends BaseApiClient {
                 ...(client.site.authType === 'jwt' ? { 'Authorization': `Bearer ${client.site.auth}` } : {})
             }
         });
+
+        // For plain-permalink sites: translate endpoint paths into ?rest_route= query params
+        if (client.site.restRouteFallback) {
+            this.wcClient.interceptors.request.use(cfg => {
+                if (cfg.url && cfg.url !== '/') {
+                    cfg.params = { ...(cfg.params ?? {}), rest_route: cfg.url };
+                    cfg.url = '/';
+                }
+                return cfg;
+            });
+        }
 
         // Add response interceptor for better error handling
         this.wcClient.interceptors.response.use(

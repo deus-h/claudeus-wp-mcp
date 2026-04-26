@@ -335,7 +335,8 @@ export async function routeToolCall(
     // Handle discovery tools
     if (toolName === 'claudeus_wp_discover_endpoints') {
         const baseUrl = clients.posts.site.url;
-        const response = await axios.get(`${baseUrl}/wp-json/`);
+        const endpoint = clients.posts.site.restRouteFallback ? '/?rest_route=/' : '/wp-json/';
+        const response = await axios.get(`${baseUrl}${endpoint}`);
         return {
             content: [{
                 type: "text",

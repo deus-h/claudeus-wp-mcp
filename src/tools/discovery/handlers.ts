@@ -5,7 +5,8 @@ export async function handleDiscoveryTools(name: string, args: Record<string, un
   switch (name) {
     case 'claudeus_wp_discover_endpoints': {
       const baseUrl = client.site.url;
-      const response = await axios.get(`${baseUrl}/wp-json/`);
+      const endpoint = client.site.restRouteFallback ? '/?rest_route=/' : '/wp-json/';
+      const response = await axios.get(`${baseUrl}${endpoint}`);
       return {
         content: [{
           type: "text",

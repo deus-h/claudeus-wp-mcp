@@ -14,9 +14,9 @@ export class AstraApiClient {
 
     constructor(site: SiteConfig) {
         this._site = site;
-        // Create client with base URL pointing to wp-json root (not wp/v2)
+        const baseURL = site.restRouteFallback ? site.url : `${site.url}/wp-json`;
         this.client = axios.create({
-            baseURL: `${site.url}/wp-json`,
+            baseURL,
             auth: site.authType === 'basic' ? {
                 username: site.username,
                 password: site.auth
@@ -27,6 +27,17 @@ export class AstraApiClient {
                 ...(site.authType === 'jwt' ? { 'Authorization': `Bearer ${site.auth}` } : {})
             }
         });
+
+        // For plain-permalink sites: translate endpoint paths into ?rest_route= query params
+        if (site.restRouteFallback) {
+            this.client.interceptors.request.use(cfg => {
+                if (cfg.url && cfg.url !== '/') {
+                    cfg.params = { ...(cfg.params ?? {}), rest_route: cfg.url };
+                    cfg.url = '/';
+                }
+                return cfg;
+            });
+        }
     }
 
     get site(): SiteConfig {

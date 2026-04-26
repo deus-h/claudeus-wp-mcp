@@ -13,8 +13,9 @@ export class HealthApiClient {
 
     constructor(site: SiteConfig) {
         this._site = site;
+        const baseURL = site.restRouteFallback ? site.url : `${site.url}/wp-json`;
         this.client = axios.create({
-            baseURL: `${site.url}/wp-json`, // Base URL points to wp-json root
+            baseURL,
             auth: site.authType === 'basic' ? {
                 username: site.username,
                 password: site.auth
@@ -25,6 +26,17 @@ export class HealthApiClient {
                 ...(site.authType === 'jwt' ? { 'Authorization': `Bearer ${site.auth}` } : {})
             }
         });
+
+        // For plain-permalink sites: translate endpoint paths into ?rest_route= query params
+        if (site.restRouteFallback) {
+            this.client.interceptors.request.use(cfg => {
+                if (cfg.url && cfg.url !== '/') {
+                    cfg.params = { ...(cfg.params ?? {}), rest_route: cfg.url };
+                    cfg.url = '/';
+                }
+                return cfg;
+            });
+        }
     }
 
     get site(): SiteConfig {

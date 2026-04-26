@@ -35,7 +35,8 @@ export async function loadSiteConfig(): Promise<SiteConfigurations> {
                     url: url.replace(/\/$/, ''),
                     username: site.USER,
                     auth: site.PASS,
-                    authType: (site.authType || 'basic') as 'basic' | 'jwt'
+                    authType: (site.authType || 'basic') as 'basic' | 'jwt',
+                    restRouteFallback: site.restRouteFallback
                 };
             } catch (error) {
                 throw new Error(`Invalid site URL: ${site.URL} - ${error instanceof Error ? error.message : 'Unknown error'}`);
